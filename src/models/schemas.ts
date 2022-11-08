@@ -18,7 +18,7 @@ export interface SchemaField {
 export class Schema {
     private fields: SchemaField[] = [];
     
-    constructor(public name: string) { }
+    constructor(public readonly name: string) { }
 
 
     // A lot of these are similiar but I feel this is best for readibility
