@@ -2,11 +2,14 @@
     <div class="p-3">
         <h2> Schema: {{schema.name}} </h2>
 
-        <div class="border mb-3" v-for="field in schema.getFields()">
-            <h5> Field name: {{ field.label }} </h5>
+        <div class="field-info" v-for="field in schema.getFields()">
+            <h5> 
+                Field name: {{ field.label }} 
+                <span v-if="field.required == true" class="badge rounded-pill bg-dark"> Required </span>
+                <span v-else class="badge rounded-pill bg-secondary"> Not Required </span>
+            </h5>
             <div class="row">
-                <div class="col-6"> Type: {{field.type}} </div>
-                <div class="col-6"> Required: {{ field.required? 'yes': 'no' }} </div>
+                <div class="col-12"> Type: {{field.type}} </div>
             </div>
         </div> 
     </div>
@@ -27,5 +30,22 @@
 
 
 <style scoped lang="scss">
+
+.field-info {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+
+    &:first {
+        border-top: 0px;
+    }
+
+    h5 .badge {
+        font-size: .8rem;
+    }
+}
+
+
 
 </style>
