@@ -5,10 +5,8 @@ import { Schema } from '../models/schemas';
 import { USER_SCHEMA, POST_SCHEMA } from '../data/sampleSchemas';
 
 export const SchemaStore = defineStore('schemas', () => {
-    // const schemas = reactive([]);)
     const schemas = reactive<Schema[]>([USER_SCHEMA, POST_SCHEMA]);
 
-    // function 
     function getSchemas() {
         return schemas;
     }
@@ -16,8 +14,7 @@ export const SchemaStore = defineStore('schemas', () => {
     function createSchema(label: string) {
         let newSchema: Schema = new Schema(label);
         schemas.push(newSchema);
-        return newSchema;
-        // schemas.push(new Schema(label));
+        return reactive(newSchema);
     }
 
     return { schemas, getSchemas, createSchema };

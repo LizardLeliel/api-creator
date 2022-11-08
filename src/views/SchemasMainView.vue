@@ -10,11 +10,17 @@
         New Schema?!?
     </button>
 
+    <button class="btn btn-dark" @click="updateLastSchema">
+        Schema gets new field?!?
+    </button>
+
 </template>
 
 
 
 <script setup lang="ts">
+    import { reactive } from 'vue';
+
     import { FieldType, Schema } from '@/models/schemas';
     import { SchemaStore } from '@/stores/schemaStore';
 
@@ -22,10 +28,15 @@
     console.log(schemasStore.getSchemas());
 
     const schemas = schemasStore.getSchemas();
-    // console.log(SchemaStore.getSChe)
+
+    var lastSchema: any;
 
     function addNewSchema() {
-        schemasStore.createSchema('topics');
+        lastSchema = schemasStore.createSchema('topics');
+    }
+
+    function updateLastSchema() {
+        lastSchema.addSimpleField('name', FieldType.string);
     }
 
 </script>
