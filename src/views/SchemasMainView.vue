@@ -1,14 +1,23 @@
 <template>
     <h1> Schemas </h1>
 
-    <div v-for="schema in schemas">
+    <hr />
+
+    <div class="mb-3 p-3 shadow" v-for="schema in schemas">
         <h2> Schema: {{ schema.name }} </h2>
-        {{ JSON.stringify(schema.getFields()) }}
+        <!-- {{ JSON.stringify(schema.getFields()) }} -->
+        <div class="border mb-3" v-for="field in schema.getFields()">
+            <h5> Label: {{ field.label }} </h5>
+            <div class="row">
+                <div class="col-6"> Type: {{ field.type }} </div>
+                <div class="col-6"> Required: {{ field.required? "Yes": "No" }} </div>
+            </div>
+        </div>
         <hr>
     </div>
 
     Schema Name: <input v-model="newSchemaName" type="text" /> <br>
-    <button class="btn btn-dark" @click="addNewSchema">
+    <button type="button" class="btn btn-dark mb-2" @click="addNewSchema">
         Create New Schema named "{{newSchemaName}}"
     </button> <br>
     
@@ -16,7 +25,7 @@
 
     <template v-if="schemaSet == true">
         Field Name: <input v-model="newFieldName" type="text" /> <br>
-        <button class="btn btn-dark" @click="updateLastSchema">
+        <button type="button" class="btn btn-dark mb-2" @click="updateLastSchema">
             Create string field "{{newFieldName}}" for schema "{{lastSchema.name}}"
         </button> <br>
     </template>
