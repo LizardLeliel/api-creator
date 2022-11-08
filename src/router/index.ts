@@ -18,7 +18,7 @@ const router = createRouter({
     {
       path: "/schemas",
       name: "schemas",
-      component: ObjectsMainView,
+      component: SchemasMainView,
     },
     {
       path: "/actions",
@@ -28,7 +28,7 @@ const router = createRouter({
     {
       path: "/objects",
       name: "objects",
-      component: SchemasMainView,
+      component: ObjectsMainView,
     },
     {
       path: "/about",

@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from "vue-router";
 
 <template>
   <!-- <nav class="nav-tabs"> -->
-    <nav class="navbar nav-tabs nav-justified mr-auto">
+    <nav class="navbar nav-tabs nav-justified mr-auto sticky-top">
       <RouterLink class="nav-link" to="/">Home</RouterLink>
       <RouterLink class="nav-link" to="/schemas">Schemas</RouterLink> 
       <RouterLink class="nav-link" to="/objects">Objects</RouterLink> 
@@ -14,7 +14,9 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink class="nav-link" to="/about">About</RouterLink> 
     </nav>
 
-  <RouterView> </RouterView>
+  <div class="container">
+    <RouterView> </RouterView>
+  </div>
 
   <div style="height: 8000px"></div>
 
