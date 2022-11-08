@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from "vue-router";
 
 <template>
   <!-- <nav class="nav-tabs"> -->
-    <nav class="navbar nav-tabs nav-justified bg-dark text-light mr-auto">
+    <nav class="navbar nav-tabs nav-justified mr-auto">
       <RouterLink class="nav-link" to="/">Home</RouterLink>
       <RouterLink class="nav-link" to="/schemas">Schemas</RouterLink> 
       <RouterLink class="nav-link" to="/objects">Objects</RouterLink> 
@@ -28,8 +28,17 @@ nav.navbar {
   .nav-link {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border: 1px solid #666;
     border-radius: 0;
+    overflow: hidden;
+    background-color: #262626;
+    color: #eee;
+
+    &.router-link-active {
+      // color: #999;
+      color: #ddd;
+      background-color: #444;
+      background-image: linear-gradient(0deg, rgb(22%, 22%, 22%) 0%, rgba(0, 0, 0, 0) 33%);
+    }
   }
 }
 
