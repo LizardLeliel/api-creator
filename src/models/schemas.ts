@@ -22,7 +22,7 @@ export class Schema {
     private fields: SchemaField[] = [];
     
     // Todo: make name private with getters and setters, support renaming a schema.
-    constructor(public readonly name: string) { }
+    constructor(public readonly name: string, public readonly description?: string) { }
 
 
     // A lot of these are similiar but I feel this is best for readibility

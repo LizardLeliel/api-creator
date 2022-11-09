@@ -1,8 +1,18 @@
 <template>
     <div class="p-2">
-        <div class="p-3 shadow">
-            <h2> Schema: {{ schema.name }} </h2>
-            <p> Fields: {{ fieldCount }} </p>
+        <div class="h-100 p-3 shadow">
+            <div class="row h-100">
+                <div class="col-8">
+                    <h2> Schema: {{ schema.name }} </h2>
+                    <p> Fields: {{ fieldCount }} </p>
+                    <p> {{ schema.description }} </p>
+                </div>
+                <div class="col-4 h-100">
+                    <button type="button" class="btn btn-dark h-100 w-100">
+                        Edit
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
