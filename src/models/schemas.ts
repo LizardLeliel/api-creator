@@ -9,7 +9,7 @@ export enum FieldType {
 
 export type ReducedFieldType = Omit<FieldType, FieldType.array | FieldType.object>;
 
-// Todo: this might deserve its own class
+// Todo: Refactor fields into its own class
 export interface SchemaField {
     label:        string;
     description:  string;
@@ -21,6 +21,7 @@ export interface SchemaField {
 export class Schema {
     private fields: SchemaField[] = [];
     
+    // Todo: make name private with getters and setters, support renaming a schema.
     constructor(public readonly name: string) { }
 
 
