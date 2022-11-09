@@ -4,6 +4,7 @@ import ObjectsMainView from "../views/ObjectsMainView.vue";
 import ActionsMainView from "../views/ActionsMainView.vue";
 import SchemasMainView from "../views/SchemasMainView.vue";
 import FileNotFoundView from "../views/FileNotFoundView.vue";
+import SchemaEditView from '../views/SchemaEditView.vue';
 import AboutView from "../views/AboutView.vue";
 
 
@@ -19,6 +20,12 @@ const router = createRouter({
       path: "/schemas",
       name: "schemas",
       component: SchemasMainView,
+    },
+    {
+      path: "/schemas/:schemaName(\\w+)",
+      name: "schema-edit",
+      component: SchemaEditView,
+      props: true
     },
     {
       path: "/actions",

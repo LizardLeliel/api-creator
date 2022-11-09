@@ -8,9 +8,11 @@
                     <p> {{ schema.description }} </p>
                 </div>
                 <div class="col-4 h-100">
-                    <button type="button" class="btn btn-dark h-100 w-100">
-                        Edit
-                    </button>
+                    <RouterLink :to="'/schemas/' + schema.name">
+                        <button type="button" class="btn btn-dark h-100 w-100">
+                            Edit
+                        </button>
+                    </RouterLink>
                 </div>
             </div>
         </div>
