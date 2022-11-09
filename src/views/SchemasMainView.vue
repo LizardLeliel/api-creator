@@ -9,7 +9,7 @@
 
     <hr />
 
-    Schema Name: <input v-model="newSchemaName" type="text" /> <br>
+    New Schema Name: <input v-model="newSchemaName" type="text" /> <br>
     <button type="button" class="btn btn-dark mb-2" @click="addNewSchema">
         Create New Schema named "{{newSchemaName}}"
     </button> <br>
@@ -25,8 +25,9 @@
 
     <br>
 
-    <button type="button" class="btn btn-dark mb-2" @click="arbitrarlyExpandFirstSchema">
-        Change the first schema
+    <input v-model='firstSchemaNewFieldName' type="text" /> <br />
+    <button type="button" class="btn btn-dark mb-2" @click="arbitrarlyExpandFirstSchema(firstSchemaNewFieldName)">
+        Add the string field "{{firstSchemaNewFieldName}}" the first schema
     </button> <br>
 
     <button type="button" class="btn btn-dark mb-2" @click="arbitrarlyReduceFirstSchema">
@@ -64,11 +65,14 @@
     }
 
     function updateLastSchema() {
-        lastSchema.value.addSimpleField(newFieldName.value, FieldType.string);
+        // lastSchema.value.addSimpleField(newFieldName.value, FieldType.string);
+        schemasStore.addSimpleSchemaField(lastSchema.value.name, newFieldName.value, FieldType.string);
     }
 
-    function arbitrarlyExpandFirstSchema() {
-        schemasStore.modifyFirstSchema();
+
+    const firstSchemaNewFieldName = ref('Mood');
+    function arbitrarlyExpandFirstSchema(fieldName: string) {
+        schemasStore.modifyFirstSchema(fieldName);
     }
 
     function arbitrarlyReduceFirstSchema() {

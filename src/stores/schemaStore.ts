@@ -2,7 +2,7 @@ import { ref, computed, reactive, readonly, shallowReactive } from 'vue';
 import { defineStore } from 'pinia';
 
 import { FieldType, Schema } from '../models/schemas';
-import { USER_SCHEMA, POST_SCHEMA } from '../data/sampleSchemas';
+import { SAMPLE_SCHEMAS } from '../data/sampleSchemas';
 
 import type { UnwrapNestedRefs } from 'vue';
 
@@ -10,7 +10,7 @@ import type { UnwrapNestedRefs } from 'vue';
 export const SchemaStore = defineStore('schemas', () => {
     // TODO: implement schemas as a key-value map, where the key is the name of the schema, so finding
     //  a schema is O(1) access.
-    const schemas = shallowReactive<UnwrapNestedRefs<Schema>[]>([reactive(USER_SCHEMA), reactive(POST_SCHEMA)]);
+    const schemas = shallowReactive<UnwrapNestedRefs<Schema>[]>(reactive(SAMPLE_SCHEMAS));
 
     // Todo: implement this as computer, which turns the key-value map to an array. 
     function getSchemas() {
@@ -69,8 +69,8 @@ export const SchemaStore = defineStore('schemas', () => {
     }
 
     // Todo: delete this two testing/development functions
-    function modifyFirstSchema() {
-        addSimpleSchemaField(schemas[0].name, 'mood', FieldType.string);
+    function modifyFirstSchema(fieldName: string) {
+        addSimpleSchemaField(schemas[0].name, fieldName, FieldType.string);
     }
 
     function removeFirstSchemaName() {
