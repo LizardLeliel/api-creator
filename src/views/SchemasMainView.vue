@@ -5,6 +5,8 @@
 
     <SchemaDisplay class="shadow mb-3" v-for="schema of schemas" :schema="schema"> </SchemaDisplay>
 
+    <SchemaEdit class="shadow mb-3" v-for="schema of schemas" :schema="schema"> </SchemaEdit>
+
     Schema Name: <input v-model="newSchemaName" type="text" /> <br>
     <button type="button" class="btn btn-dark mb-2" @click="addNewSchema">
         Create New Schema named "{{newSchemaName}}"
@@ -39,7 +41,8 @@
     import { FieldType, Schema } from '@/models/schemas';
     import { SchemaStore } from '@/stores/schemaStore';
 
-    import SchemaDisplay from '../components/SchemaDisplay.vue';
+    import SchemaEdit from '../components/SchemaEdit.vue';
+    import SchemaDisplay from '../components/SchemaShortDisplay.vue';
 
     const schemasStore = SchemaStore();
 

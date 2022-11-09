@@ -18,7 +18,6 @@
 
 
 <script setup lang="ts">
-    // import { defineProps } from 'vue';
     import { Schema } from '../models/schemas';
 
     defineProps({

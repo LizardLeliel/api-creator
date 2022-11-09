@@ -105,6 +105,7 @@ export class Schema {
         return foundIndex;
     }
 
+    // Todo: find a way to display fields without allowing modification (vue's readonly?)
     public getFields(): SchemaField[] {
         return this.fields;
     }
