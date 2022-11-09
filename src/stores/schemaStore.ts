@@ -38,11 +38,12 @@ export const SchemaStore = defineStore('schemas', () => {
     // As much as allowing users to modify schemas directly instead of using these wrapper functions
     //  would be much easier to understand, the functionality to change a schema's name, which
     //  must be unique, justifies these wrapper functions.
-    function addSimpleSchema(schema: string, field: string, type: FieldType, description: string = '', required: boolean = true): true | undefined {
+    function addSimpleSchemaField(schema: string, field: string, type: FieldType, description: string = '', required: boolean = true): true | undefined {
         const foundSchema = _getSchemaByName(schema);
         if (!foundSchema) return undefined;
         
-        foundSchema.addSimpleField(field, type, description, require);
+        // const newSchema = reactive(new Schema(schema, type, description));
+        foundSchema.addSimpleField(field, type, description, required);
         return true;
     }
     
@@ -69,12 +70,15 @@ export const SchemaStore = defineStore('schemas', () => {
 
     // Todo: delete this two testing/development functions
     function modifyFirstSchema() {
-        schemas[0].addSimpleField('Registration Date', FieldType.string);
+        addSimpleSchemaField(schemas[0].name, 'mood', FieldType.string);
     }
 
     function removeFirstSchemaName() {
-        schemas[0].removeField('name');
+        removeSchemaField(schemas[0].name, 'name');
     }
 
-    return { getSchemas, createSchema, modifyFirstSchema, removeFirstSchemaName };
+    return { getSchemas, createSchema, getSchemaByName,
+        addSimpleSchemaField, changeSchemaFieldRequired, changeSchemaFieldDescription, removeSchemaField,
+        modifyFirstSchema, removeFirstSchemaName 
+    };
 });
