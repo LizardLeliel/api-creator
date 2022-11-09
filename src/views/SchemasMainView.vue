@@ -19,6 +19,16 @@
         </button> <br>
     </template>
 
+    <br>
+
+    <button type="button" class="btn btn-dark mb-2" @click="arbitrarlyExpandFirstSchema">
+        Change the first schema
+    </button> <br>
+
+    <button type="button" class="btn btn-dark mb-2" @click="arbitrarlyReduceFirstSchema">
+        Delete "name" field from first schema
+    </button> <br>
+
 </template>
 
 
@@ -32,14 +42,16 @@
     import SchemaDisplay from '../components/SchemaDisplay.vue';
 
     const schemasStore = SchemaStore();
+
     const schemas = schemasStore.getSchemas();
 
     let newSchemaName = ref('');
     let newFieldName = ref('');
 
 
-    var lastSchema: any = ref(undefined);
+    let lastSchema: any = ref(undefined);
     let schemaSet: any = ref(false);
+
     function addNewSchema() {
         lastSchema.value = schemasStore.createSchema(newSchemaName.value);
         schemaSet.value = true;
@@ -48,6 +60,14 @@
 
     function updateLastSchema() {
         lastSchema.value.addSimpleField(newFieldName.value, FieldType.string);
+    }
+
+    function arbitrarlyExpandFirstSchema() {
+        schemasStore.modifyFirstSchema();
+    }
+
+    function arbitrarlyReduceFirstSchema() {
+        schemasStore.removeFirstSchemaName();
     }
 
 </script>
