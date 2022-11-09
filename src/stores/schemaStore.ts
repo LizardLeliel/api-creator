@@ -1,4 +1,4 @@
-import { ref, computed, reactive } from 'vue';
+import { ref, computed, reactive, readonly } from 'vue';
 import { defineStore } from 'pinia';
 
 import { FieldType, Schema } from '../models/schemas';
@@ -8,7 +8,7 @@ export const SchemaStore = defineStore('schemas', () => {
     const schemas = reactive<Schema[]>([USER_SCHEMA, POST_SCHEMA]);
 
     function getSchemas() {
-        return schemas;
+        return readonly(schemas);
     }
 
     function createSchema(label: string) {
@@ -25,8 +25,5 @@ export const SchemaStore = defineStore('schemas', () => {
         schemas[0].removeField('name');
     }
 
-    // getSchemas makes returning the schemas variable redundent,
-    //  probably delete it? We want components to be able to list them
-    //  but use store functions to modify it
-    return { schemas, getSchemas, createSchema, modifyFirstSchema, removeFirstSchemaName };
+    return { getSchemas, createSchema, modifyFirstSchema, removeFirstSchemaName };
 });
