@@ -24,8 +24,6 @@ export class Schema {
     // Todo: make name private with getters and setters, support renaming a schema.
     constructor(public readonly name: string, public readonly description?: string) { }
 
-
-    // A lot of these are similiar but I feel this is best for readibility
     public addSimpleField(label: string, type: FieldType, description='', required = true): SchemaField | undefined {
         if (this.getField(label)) return undefined;
 
@@ -77,7 +75,7 @@ export class Schema {
     }
 
     // It doesn't make sense to change a field's type; users should delete the field and create a new one.
-    //  (although this would create migration issue as users would have to manually create migration tasks...)
+    //  Since this software is intended for protopypal purposes, there's no need to fret migration headaches.
     // public changeFieldSimpleType(fieldName: string, newType: SchemaField) { }
 
     // Todo: implement these later
@@ -85,7 +83,7 @@ export class Schema {
     // public addObjectField(label: string, type: FieldType, subtype: Schema, required = false) { }
     
 
-    // Todo: make "not found" return result consistent. (Probalby use exceptions?)
+    // Todo: make "not found" return result consistent. (Probably use exceptions?)
     public removeField(label: string): boolean {
         // Todo: implement this
         let foundIndex = this.fields.find((element) => element.label == label);
@@ -97,7 +95,7 @@ export class Schema {
             return true;
         }
 
-        // TODO: Once we implement "objects"/instances, we'll have delete the fields off of them.
+        // TODO: anything we need to do once we implement the ability to have fields link to other objects?
     }
 
     public getField(label: string): SchemaField | undefined {
@@ -105,7 +103,6 @@ export class Schema {
         return foundIndex;
     }
 
-    // Todo: find a way to display fields without allowing modification (vue's readonly?)
     public getFields(): SchemaField[] {
         return this.fields;
     }

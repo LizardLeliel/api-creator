@@ -12,7 +12,7 @@ export const SchemaStore = defineStore('schemas', () => {
     //  a schema is O(1) access.
     const schemas = shallowReactive<UnwrapNestedRefs<Schema>[]>(reactive(SAMPLE_SCHEMAS));
 
-    // Todo: implement this as computer, which turns the key-value map to an array. 
+    // TODO (optimization): implement this as a computed, which turns the key-value map to an array. 
     function getSchemas() {
         return readonly(schemas);
     }
@@ -32,8 +32,6 @@ export const SchemaStore = defineStore('schemas', () => {
     function _getSchemaByName(name: string): any {
         return schemas.find(element => element.name == name);
     }
-
-    // function changeSchemaFieldRequired(name: string, field: string, required: boolean) {
 
     // As much as allowing users to modify schemas directly instead of using these wrapper functions
     //  would be much easier to understand, the functionality to change a schema's name, which

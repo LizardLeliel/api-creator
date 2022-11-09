@@ -5,7 +5,6 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <!-- <nav class="nav-tabs"> -->
     <nav class="navbar nav-tabs nav-justified mr-auto sticky-top">
       <RouterLink class="nav-link" to="/">Home</RouterLink>
       <RouterLink class="nav-link" to="/schemas">Schemas</RouterLink> 

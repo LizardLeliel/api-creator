@@ -64,7 +64,6 @@
     }
 
     function updateLastSchema() {
-        // lastSchema.value.addSimpleField(newFieldName.value, FieldType.string);
         schemasStore.addSimpleSchemaField(lastSchema.value.name, newFieldName.value, FieldType.string);
     }
 
