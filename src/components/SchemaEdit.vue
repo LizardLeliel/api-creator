@@ -18,7 +18,7 @@
 
 
 <script setup lang="ts">
-    import { Schema } from '../models/schemas';
+    import { Schema } from '@/models/schemas';
 
     defineProps({
         schema:  { type: Schema, required: true },

@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import ObjectsMainView from "../views/ObjectsMainView.vue";
-import ActionsMainView from "../views/ActionsMainView.vue";
-import SchemasMainView from "../views/SchemasMainView.vue";
-import FileNotFoundView from "../views/FileNotFoundView.vue";
-import SchemaEditView from '../views/SchemaEditView.vue';
-import AboutView from "../views/AboutView.vue";
+import HomeView from "@/views/HomeView.vue";
+import ObjectsMainView from "@/views/ObjectsMainView.vue";
+import ActionsMainView from "@/views/ActionsMainView.vue";
+import SchemasMainView from "@/views/SchemasMainView.vue";
+import FileNotFoundView from "@/views/FileNotFoundView.vue";
+import SchemaEditView from '@/views/SchemaEditView.vue';
+import AboutView from "@/views/AboutView.vue";
 
 
 const router = createRouter({

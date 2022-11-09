@@ -15,7 +15,6 @@
 
 
 <script setup lang="ts">
-    import { Schema } from '../models/schemas';
     import { SchemaStore } from '@/stores/schemaStore';
 
     import SchemaEdit from '@/components/SchemaEdit.vue';

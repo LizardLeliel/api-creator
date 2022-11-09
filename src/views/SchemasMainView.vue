@@ -39,13 +39,12 @@
 
 
 <script setup lang="ts">
-    import { reactive, ref } from 'vue';
+    import { ref } from 'vue';
 
     import { FieldType, Schema } from '@/models/schemas';
     import { SchemaStore } from '@/stores/schemaStore';
 
-    import SchemaEdit from '../components/SchemaEdit.vue';
-    import SchemaDisplay from '../components/SchemaShortDisplay.vue';
+    import SchemaDisplay from '@/components/SchemaShortDisplay.vue';
 
     const schemasStore = SchemaStore();
 

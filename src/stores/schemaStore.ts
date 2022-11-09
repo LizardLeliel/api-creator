@@ -1,8 +1,8 @@
 import { ref, computed, reactive, readonly, shallowReactive } from 'vue';
 import { defineStore } from 'pinia';
 
-import { FieldType, Schema } from '../models/schemas';
-import { SAMPLE_SCHEMAS } from '../data/sampleSchemas';
+import { FieldType, Schema } from '@/models/schemas';
+import { SAMPLE_SCHEMAS } from '@/data/sampleSchemas';
 
 import type { UnwrapNestedRefs } from 'vue';
 
