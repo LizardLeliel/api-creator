@@ -1,10 +1,9 @@
 <template>
-    <div class="p-3">
-        <h2> Schema: {{ schema.name }} </h2>
-
-        <p> Fields: {{ fieldCount }} </p>
-
-
+    <div class="p-2">
+        <div class="p-3 shadow">
+            <h2> Schema: {{ schema.name }} </h2>
+            <p> Fields: {{ fieldCount }} </p>
+        </div>
     </div>
 </template>
 
@@ -27,5 +26,4 @@
 
 
 <style scoped lang="scss">
-
 </style>

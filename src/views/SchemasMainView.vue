@@ -3,9 +3,13 @@
 
     <hr />
 
-    <SchemaDisplay class="shadow mb-3" v-for="schema of schemas" :schema="schema"> </SchemaDisplay>
+    <div class="row no-gutters p-3">
+        <SchemaDisplay class="col-6" v-for="schema of schemas" :schema="schema"> </SchemaDisplay>
+    </div>
 
-    <SchemaEdit class="shadow mb-3" v-for="schema of schemas" :schema="schema"> </SchemaEdit>
+    <hr />
+
+    <SchemaEdit class="shadow mb-3 p-3" v-for="schema of schemas" :schema="schema"> </SchemaEdit>
 
     Schema Name: <input v-model="newSchemaName" type="text" /> <br>
     <button type="button" class="btn btn-dark mb-2" @click="addNewSchema">

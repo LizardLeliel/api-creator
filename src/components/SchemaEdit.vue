@@ -1,5 +1,5 @@
 <template>
-    <div class="p-3">
+    <div>
         <h2> Schema: {{schema.name}} </h2>
 
         <div class="field-info" v-for="field in schema.getFields()">
