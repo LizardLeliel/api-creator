@@ -49,6 +49,7 @@ export class Schema {
     }
 
     // Todo: rewrite to use exceptions so the multiple fail cases here can be determined.
+    // Todo: Decide to remove this functionality, or implement it in schema edit pages.
     public changeFieldName(label: string, newLabel: string): SchemaField | undefined {
         const foundSourceField = this.getField(label);
         if (!foundSourceField) return undefined;

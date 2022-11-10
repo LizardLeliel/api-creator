@@ -17,6 +17,10 @@ export const SchemaStore = defineStore('schemas', () => {
         return readonly(schemas);
     }
 
+    // As much as allowing users to modify schemas directly instead of using these wrapper functions
+    //  would be much easier to understand, the functionality to change a schema's name, which
+    //  must be unique, justifies these wrapper functions.
+    // TODO: VERIFY UNIQUENESS OF NAME!!
     function createSchema(label: string) {
         let newSchema: Schema = new Schema(label);
         schemas.push(newSchema);
@@ -33,9 +37,6 @@ export const SchemaStore = defineStore('schemas', () => {
         return schemas.find(element => element.name == name);
     }
 
-    // As much as allowing users to modify schemas directly instead of using these wrapper functions
-    //  would be much easier to understand, the functionality to change a schema's name, which
-    //  must be unique, justifies these wrapper functions.
     function addSimpleSchemaField(schema: string, field: string, type: FieldType, description: string = '', required: boolean = true): true | undefined {
         const foundSchema = _getSchemaByName(schema);
         if (!foundSchema) return undefined;
