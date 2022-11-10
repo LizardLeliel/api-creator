@@ -1,16 +1,20 @@
 <template>
     <div class="field-info">
         <h5 class="w-100 ps-1"> 
-            <u>Field</u>: <span>{{ field.label }} </span>
-            <!-- <u>Field</u>: <input class="write-field-name" type="text" v-model="editLabel" /> -->
-            <!-- &nbsp; &nbsp; <button type="button" class="btn btn-dark" @click="updateName"> Save Name </button> -->
-
-            <span class="position-absolute end-0" style="width: 200px;">
-                &emsp; <input class="form-check-input" type="checkbox" v-model="editRequired"  /> &nbsp;
+            <p class="mb-0"> 
+                <u>Field</u>: <span>{{ field.label }} </span>
+                <!-- <u>Field</u>: <input class="write-field-name" type="text" v-model="editLabel" /> -->
+                <!-- &nbsp; &nbsp; <button type="button" class="btn btn-dark" @click="updateName"> Save Name </button> -->
                 
-                <span v-if="field.required == true" class="badge rounded-pill bg-dark"> Required </span>
-                <span v-else class="badge rounded-pill bg-secondary"> Not Required </span>
-            </span>
+                <span class="position-absolute end-0" style="width: 200px;">
+                    &emsp; <input class="form-check-input" type="checkbox" v-model="editRequired"  /> &nbsp;
+                    
+                    <span v-if="field.required == true" class="badge rounded-pill bg-dark"> Required </span>
+                    <span v-else class="badge rounded-pill bg-secondary"> Not Required </span>
+                </span>
+            </p>
+
+            <p class="mb-0"> <small> Type: {{field.type}} </small> </p> 
         </h5>
 
         
@@ -41,9 +45,9 @@
                 </div>
             </div>
         </div>
-        <div class="row ps-1">
-            <div class="col-12"> Type: {{field.type}} </div>
-        </div>
+            <button class="btn btn-danger" type="button" @click="deleteField">
+                Delete Field
+            </button>
     </div> 
 </template>
 
@@ -108,6 +112,10 @@
     function saveDescriptionEdit() {
         isEditingDescription.value = false;
         schemasStore.changeSchemaFieldDescription(schema.name, props.field.label, editDescription.value);
+    }
+
+    function deleteField() {
+        schemasStore.removeSchemaField(schema.name, props.field.label);
     }
 </script>
 
