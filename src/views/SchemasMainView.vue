@@ -23,17 +23,6 @@
         </button> <br>
     </template>
 
-    <br>
-
-    <input v-model='firstSchemaNewFieldName' type="text" /> <br />
-    <button type="button" class="btn btn-dark mb-2" @click="arbitrarlyExpandFirstSchema(firstSchemaNewFieldName)">
-        Add the string field "{{firstSchemaNewFieldName}}" the first schema
-    </button> <br>
-
-    <button type="button" class="btn btn-dark mb-2" @click="arbitrarlyReduceFirstSchema">
-        Delete "name" field from first schema
-    </button> <br>
-
 </template>
 
 
@@ -65,16 +54,6 @@
 
     function updateLastSchema() {
         schemasStore.addSimpleSchemaField(lastSchema.value.name, newFieldName.value, FieldType.string);
-    }
-
-
-    const firstSchemaNewFieldName = ref('Mood');
-    function arbitrarlyExpandFirstSchema(fieldName: string) {
-        schemasStore.modifyFirstSchema(fieldName);
-    }
-
-    function arbitrarlyReduceFirstSchema() {
-        schemasStore.removeFirstSchemaName();
     }
 
 </script>
