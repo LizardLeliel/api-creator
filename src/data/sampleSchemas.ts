@@ -17,7 +17,7 @@ let SOCIAL_ACHIEVEMENTS_SCHEMA: Schema = new Schema('Achievmement', 'Various rew
 USER_SCHEMA.addSimpleField('name', FieldType.string, 'The user\'s display name');
 // USER_SCHEMA.addSimpleField('verified', FieldType.boolean, 'If user has been email-verified');
 USER_SCHEMA.addSimpleField('verified', FieldType.boolean, veryLongFieldDescription);
-USER_SCHEMA.addSimpleField('email', FieldType.string, '', false);
+USER_SCHEMA.addSimpleField('email', FieldType.email, '', false);
 USER_SCHEMA.addSimpleField('created', FieldType.string, 'Account\'s creation day', false);
 USER_SCHEMA.addSimpleField('follows', FieldType.number, 'account\'s total amount');
 
