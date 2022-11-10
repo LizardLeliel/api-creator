@@ -3,7 +3,7 @@
         <h5 class="w-100"> 
             Field name: {{ field.label }} 
 
-            <span class="position-absolute end-0">
+            <span class="position-absolute end-0" style="width: 200px;">
                 &emsp; <input class="form-check-input" type="checkbox" v-model="editRequired"  /> &nbsp;
                 
                 <span v-if="field.required == true" class="badge rounded-pill bg-dark"> Required </span>
