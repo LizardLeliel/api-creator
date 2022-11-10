@@ -37,10 +37,11 @@
 
             </form>
 
-            <button class="btn btn-dark" :class="{ 'disabled': !validForm }" :disabled="!validForm"> 
+            <button class="btn btn-dark" :class="{ 'disabled': !validForm }" :disabled="!validForm"
+                @click="save"> 
                 Save 
             </button>
-            <button class="ms-3 btn btn-light"> Cancel </button>
+            <button class="ms-3 btn btn-light" @click="cancel"> Cancel </button>
         </div>
     </div>
 </template>
@@ -56,7 +57,7 @@
     // Setup stuff
     const schemasStore = SchemaStore();
 
-    const emit = defineEmits(['saved', 'cancel']);
+    const emit = defineEmits(['save', 'cancel']);
 
     const schema: Schema = <Schema>inject('schema');
 
@@ -117,7 +118,7 @@
             fieldDescription.value,
             fieldRequired.value,
         );
-        emit('saved');
+        emit('save');
     }
     
 </script>

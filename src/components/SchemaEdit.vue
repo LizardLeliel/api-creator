@@ -12,7 +12,7 @@
 
     <teleport to="#modal-target">
         <ModalWrapper class="shadow" v-if="showAddField">
-            <AddField> </AddField>
+            <AddField @save="closeFieldEdit" @cancel="closeFieldEdit"> </AddField>
         </ModalWrapper>
     </teleport>
 
@@ -43,7 +43,7 @@
     }
 
     function closeFieldEdit() {
-
+        showAddField.value = false;
     }
 
 </script>
