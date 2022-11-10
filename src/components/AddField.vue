@@ -21,7 +21,8 @@
 
                 <div class="mb-3">
                     <label for="fieldType"> Type: </label>
-                    <select class="form-control" v-model="fieldType" id="fieldType">
+                    <select class="form-control" :class="{ 'text-secondary': fieldType == '' }" v-model="fieldType" id="fieldType">
+                        <option class="text-light" value="" selected disabled> Please select a field type </option>
                         <option v-for="type in fieldTypes" :value="type"> 
 
                             {{ type.charAt(0).toUpperCase() + type.slice(1) }}
@@ -36,7 +37,7 @@
 
             </form>
 
-            <button class="btn btn-dark" :class="{ 'disabled': !validName }" :disabled="!validName"> Save </button>
+            <button class="btn btn-dark" :class="{ 'disabled': !validForm }" :disabled="!validName"> Save </button>
             <button class="ms-3 btn btn-light"> Cancel </button>
         </div>
     </div>
@@ -94,6 +95,14 @@
         return notEmpty && validCharacters && uniqueName;
     });
 
+    const validType = computed(() => {
+        return fieldTypes.indexOf(<FieldType> fieldType.value) != -1; 
+    });
+
+    const validForm = computed(() => {
+        return validName.value && validType.value;
+    });
+
     // Emited events
     function cancel() {
         emit('cancel');
@@ -108,8 +117,6 @@
         );
         emit('saved');
     }
-
-
     
 </script>
 
