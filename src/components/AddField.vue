@@ -37,7 +37,9 @@
 
             </form>
 
-            <button class="btn btn-dark" :class="{ 'disabled': !validForm }" :disabled="!validName"> Save </button>
+            <button class="btn btn-dark" :class="{ 'disabled': !validForm }" :disabled="!validForm"> 
+                Save 
+            </button>
             <button class="ms-3 btn btn-light"> Cancel </button>
         </div>
     </div>
