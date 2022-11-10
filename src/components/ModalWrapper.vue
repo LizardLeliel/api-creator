@@ -23,5 +23,9 @@
         z-index: 9999;
         // border: 1px solid black;
         // color: red;
+
+        overflow-y: scroll;
+
+        max-height: 80%;
     }
 </style>

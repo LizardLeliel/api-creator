@@ -16,9 +16,10 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink class="nav-link" to="/about">About</RouterLink> 
     </nav>
 
-  <div class="container">
+  <div class="container mb-4 mt-3">
     <RouterView> </RouterView>
   </div>
+
 
 </template>
 
