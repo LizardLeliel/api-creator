@@ -2,49 +2,32 @@
     <div>
         <h2> Schema: {{schema.name}} </h2>
 
-        <div class="field-info" v-for="field in schema.getFields()">
-            <h5> 
-                Field name: {{ field.label }} 
-                <span v-if="field.required == true" class="badge rounded-pill bg-dark"> Required </span>
-                <span v-else class="badge rounded-pill bg-secondary"> Not Required </span>
-            </h5>
-            <div class="row">
-                <div class="col-12"> Type: {{field.type}} </div>
-            </div>
-        </div> 
+        <SchemaFieldEdit v-for="field in schema.getFields()" :field="field">
+        
+        </SchemaFieldEdit>
     </div>
 </template>
 
 
 
 <script setup lang="ts">
-    import { Schema } from '@/models/schemas';
+    import { provide } from 'vue';
 
-    defineProps({
+    import { Schema } from '@/models/schemas';
+    import SchemaFieldEdit from '@/components/SchemaFieldEdit.vue';
+
+    const props = defineProps({
         schema:  { type: Schema, required: true },
     });
+
+    // TODO: delete this later, when Schemas, fields, stores are refactored.
+    provide('schema', props.schema);
 </script>
 
 
 
 
 <style scoped lang="scss">
-
-.field-info {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-
-    border-top: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
-
-    &:first {
-        border-top: 0px;
-    }
-
-    h5 .badge {
-        font-size: .8rem;
-    }
-}
-
 
 
 </style>

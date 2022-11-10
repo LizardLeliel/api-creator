@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
     import { computed } from 'vue';
-    import { Schema } from '../models/schemas';
+    import { Schema } from '@/models/schemas';
     
     const props = defineProps({
         schema:  { type: Schema, required: true },

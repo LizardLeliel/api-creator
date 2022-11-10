@@ -18,6 +18,16 @@ export interface SchemaField {
     required:     boolean;
 }
 
+// PropDefine can't take a TypeScript interface, so this is a wrapper until SchemaField is refactored
+//  to its own class.
+export class SchemaFieldClass implements SchemaField {
+    label:        string = '';
+    description:  string = '';
+    type:         FieldType = FieldType.string;
+    subtype?:     FieldType | Schema;
+    required:     boolean = true;
+}
+
 export class Schema {
     private fields: SchemaField[] = [];
     
