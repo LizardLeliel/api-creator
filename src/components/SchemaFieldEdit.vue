@@ -15,7 +15,12 @@
 
         
         <div class="row fit-content">
-            <div class="col-10" v-if="!isEditingDescription">
+            <!-- If there is NO description... -->
+            <div class="col-10" v-if="!isEditingDescription && editDescription.length == 0">
+                <p class="description-preview text-muted" @click="toggleEditingDescription">Click to add a description...</p>
+            </div>
+
+            <div class="col-10" v-if="!isEditingDescription && editDescription.length != 0">
                 <p class="description-preview" @click="toggleEditingDescription()"> {{ field.description }} </p>
             </div>
 
