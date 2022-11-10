@@ -20,8 +20,6 @@ import { RouterLink, RouterView } from "vue-router";
     <RouterView> </RouterView>
   </div>
 
-  <div style="height: 8000px"></div>
-
 </template>
 
 <style scoped lang="scss">
