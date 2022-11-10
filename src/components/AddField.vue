@@ -90,7 +90,8 @@
         const notEmpty = fieldLabel.value != '';
         // const invalidCharacters = /^[^\w]\s*$/.test(fieldLabel.value)   //fieldLabel.
         const validCharacters = /^[a-zA-Z]\w*$/.test(fieldLabel.value);
-        return notEmpty && validCharacters;
+        const uniqueName = schema.getField(fieldLabel.value) == undefined;
+        return notEmpty && validCharacters && uniqueName;
     });
 
     // Emited events
