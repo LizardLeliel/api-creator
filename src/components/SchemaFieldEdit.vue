@@ -16,11 +16,11 @@
         
         <div class="row fit-content">
             <!-- If there is NO description... -->
-            <div class="col-10" v-if="!isEditingDescription && editDescription.length == 0">
+            <div class="col-10" v-if="!isEditingDescription && descriptionIsEmpty">
                 <p class="description-preview text-muted" @click="toggleEditingDescription">Click to add a description...</p>
             </div>
 
-            <div class="col-10" v-if="!isEditingDescription && editDescription.length != 0">
+            <div class="col-10" v-if="!isEditingDescription && !descriptionIsEmpty">
                 <p class="description-preview" @click="toggleEditingDescription()"> {{ field.description }} </p>
             </div>
 
@@ -55,6 +55,7 @@
 
     import { SchemaStore } from '@/stores/schemaStore';
 
+    // Schema imports and props, and injects
     const schemasStore = SchemaStore();
 
     const props = defineProps({
@@ -63,6 +64,7 @@
 
     const schema = <Schema>inject('schema');
 
+    // Data
     const editRequired = ref(props.field.required);
     const editDescription = ref(props.field.description);
     const editType = ref(props.field.type);
@@ -71,10 +73,16 @@
 
     const editDescBox = ref<HTMLTextAreaElement | null>(null);
 
+    // computed
     const descriptionChanged = computed(() => {
         return editDescription.value == props.field.description;
     });
 
+    const descriptionIsEmpty = computed(() => {
+        return editDescription.value.length == 0;
+    })
+
+    // watchers
     watch(editDescBox, (newValue, oldValue) => {
         if (newValue != null) {
             // TODO: Find out why "-1" is the magic number and how to make this more programmatic.
@@ -87,6 +95,7 @@
         schemasStore.changeSchemaFieldRequired(schema.name, props.field.label, newValue);
     });
 
+    // Callbacks
     function toggleEditingDescription() {
         isEditingDescription.value = !isEditingDescription.value;
     }
