@@ -13,11 +13,28 @@
             </span>
         </h5>
 
+        
+        <div class="row fit-content">
+            <div class="col-10" v-if="!isEditingDescription">
+                <p class="description-preview" @click="toggleEditingDescription()"> {{ field.description }} </p>
+            </div>
 
-        <p class="description-preview" v-if="!isEditingDescription" @click="toggleEditingDescription()"> {{ field.description }} </p>
-        <div v-if="isEditingDescription">
-            <textarea ref="editDescBox" class="write-description-name" :v-model="editDescription">{{ editDescription }}</textarea>
+            <div class="col-10" v-if="isEditingDescription">
+                <textarea ref="editDescBox" class="write-description-name" v-model="editDescription"></textarea>
+            </div>
 
+            <div class="editButtonContainer col-2" v-if="isEditingDescription">
+                <div class="buttonWrapper">
+                    <button :disabled="descriptionChanged" :class="{ disabled: descriptionChanged }" class="btn btn-dark" type="button"
+                        @click="saveDescriptionEdit"> 
+                        Save 
+                    </button>
+                    <button class="btn btn-sceondary cancel-btn" type="button"
+                        @click="cancelDescriptionEdit"> 
+                        Cancel 
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="row ps-1">
             <div class="col-12"> Type: {{field.type}} </div>
@@ -28,7 +45,7 @@
 
 
 <script setup lang="ts">
-    import { ref, inject, watch } from 'vue'; 
+    import { ref, inject, watch, computed } from 'vue'; 
     import { Schema, SchemaFieldClass } from '@/models/schemas';
 
     import { SchemaStore } from '@/stores/schemaStore';
@@ -41,14 +58,17 @@
 
     const schema = <Schema>inject('schema');
 
-    let editRequired = ref(props.field.required);
-    let editDescription = ref(props.field.description);
-    // let editLabel = ref(props.field.label);
-    let editType = ref(props.field.type);
+    const editRequired = ref(props.field.required);
+    const editDescription = ref(props.field.description);
+    const editType = ref(props.field.type);
 
-    let isEditingDescription = ref(false);
+    const isEditingDescription = ref(false);
 
     const editDescBox = ref<HTMLTextAreaElement | null>(null);
+
+    const descriptionChanged = computed(() => {
+        return editDescription.value == props.field.description;
+    });
 
     watch(editDescBox, (newValue, oldValue) => {
         if (newValue != null) {
@@ -65,19 +85,49 @@
     function toggleEditingDescription() {
         isEditingDescription.value = !isEditingDescription.value;
     }
+
+    function cancelDescriptionEdit() {
+        isEditingDescription.value = false;
+        editDescription.value = props.field.description;
+    }
+
+    function saveDescriptionEdit() {
+        isEditingDescription.value = false;
+        schemasStore.changeSchemaFieldDescription(schema.name, props.field.label, editDescription.value);
+    }
 </script>
 
 
 
 
 <style scoped lang="scss">
+
+.cancel-btn {
+    border: 1px solid black;
+
+    &:hover {
+        background-color: lightgray;
+        border: 1px solid black;
+    }
+}
+
+.editButtonContainer {  
+    .buttonWrapper {
+        padding: 20px;
+
+        button {
+            width: 100%;
+            margin-bottom: 16px;
+        }
+    }
+}
+
 .description-preview {
-    width: 80%;
     padding: .5rem;
 
     cursor: pointer;
     &:hover {
-        text-decoration: underline dotted;
+        text-decoration: underline dotted black;
     }
 }
 
@@ -85,7 +135,7 @@
     border: 0px;
 
     border-bottom: 1px solid lightgray;
-    width: 80%;
+    width: 100%;
 
     min-height: min-content;
 
