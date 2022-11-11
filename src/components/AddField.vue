@@ -7,7 +7,7 @@
         <div class="card-body">
             <form>
                 <div class="mb-3">
-                    <label for="fieldLabel">Field Label:</label>
+                    <label for="fieldLabel">Field Label: <small>(Required)</small></label>
                     <input class="form-control" v-model="fieldLabel" 
                         @change="labelHasChanged"
                         :class="{'is-invalid': showLabelInvalid && !validName }"
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="fieldType"> Type: </label>
+                    <label for="fieldType"> Type: <small>(Required)</small> </label>
                     <select class="form-control" :class="{ 'text-secondary': fieldType == '' }" v-model="fieldType" id="fieldType">
                         <option class="text-light" value="" selected disabled> Please select a field type </option>
                         <option v-for="type in fieldTypes" :value="type"> 

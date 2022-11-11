@@ -7,7 +7,7 @@
         <div class="card-body">
             <form>
                 <div class="mb-3">
-                    <label for="fieldLabel">Schema Name:</label>
+                    <label for="fieldLabel">Schema Name: <small>required</small></label>
                     <input class="form-control" v-model="schemaName" 
                         @change="labelHasChanged"
                         :class="{'is-invalid': showNameInvalid && !validName }"
