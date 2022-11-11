@@ -31,7 +31,7 @@
     import AddField from '@/components/AddField.vue';
     import ModalWrapper from '@/components/ModalWrapper.vue';
 
-    import OpacityFadeTransition from '@/components/Transitions/OpacityFade.vue';    
+    import OpacityFadeTransition from '@/components/transitions/OpacityFade.vue';    
 
     const props = defineProps({
         schema:  { type: Schema, required: true },

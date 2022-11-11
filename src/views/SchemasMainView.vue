@@ -49,7 +49,7 @@
     import ModalWrapper from '@/components/ModalWrapper.vue';
     import AddSchema from '@/components/AddSchema.vue';
 
-    import OpacityFadeTransition from '@/components/Transitions/OpacityFade.vue';
+    import OpacityFadeTransition from '@/components/transitions/OpacityFade.vue';
 
     const schemasStore = SchemaStore();
     const schemas = schemasStore.getSchemas();
