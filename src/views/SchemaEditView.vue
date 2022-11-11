@@ -24,6 +24,10 @@
     });
 
 
+    // BIG TODO: Fields shouldn't be so coupled with schemas. They should be able to be modified
+    //  without knowing what schema they belong too.
+    // For now, continue with this approach to practice form validation.
+
     const schemasStore = SchemaStore();
     const schema = schemasStore.getSchemaByName(props.schemaName);
 

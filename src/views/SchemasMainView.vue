@@ -9,19 +9,28 @@
 
     <hr />
 
-    New Schema Name: <input v-model="newSchemaName" type="text" /> <br>
-    <button type="button" class="btn btn-dark mb-2" @click="addNewSchema">
-        Create New Schema named "{{newSchemaName}}"
-    </button> <br>
-    
-    <br>
+    <div class="row no-gutters p-3">
+        <div class="p-2 col-6">
+            <div class="p-3 shadow" style="height: 180px;">
+                <div class="row h-100">
+                    <div class="col-8">
+                        <h2> Create New Schema</h2>
+                    </div>
+                    <div class="col-4 h-100">
+                        <button type="button" class="btn btn-dark h-100 w-100" @click="createSchema">
+                            +
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <template v-if="schemaSet == true">
-        Field Name: <input v-model="newFieldName" type="text" /> <br>
-        <button type="button" class="btn btn-dark mb-2" @click="updateLastSchema">
-            Create string field "{{newFieldName}}" for schema "{{lastSchema.name}}"
-        </button> <br>
-    </template>
+    <teleport to="#modal-target">
+        <ModalWrapper class="shadow" v-if="showAddSchema">
+            <AddSchema @save="closeAddSchema" @close="closeAddSchema" />
+        </ModalWrapper>
+    </teleport>
 
 </template>
 
@@ -35,14 +44,17 @@
 
     import SchemaDisplay from '@/components/SchemaShortDisplay.vue';
 
-    const schemasStore = SchemaStore();
+    import ModalWrapper from '@/components/ModalWrapper.vue';
+    import AddSchema from '@/components/AddSchema.vue';
 
+    const schemasStore = SchemaStore();
     const schemas = schemasStore.getSchemas();
 
     let newSchemaName = ref('');
     let newFieldName = ref('');
+    let showAddSchema = ref(false);
 
-
+    // TODO: Delete this, this was for playing purposes
     let lastSchema: any = ref(undefined);
     let schemaSet: any = ref(false);
 
@@ -54,6 +66,14 @@
 
     function updateLastSchema() {
         schemasStore.addSimpleSchemaField(lastSchema.value.name, newFieldName.value, FieldType.string);
+    }
+
+    function createSchema() {
+        showAddSchema.value = true;
+    }
+
+    function closeAddSchema() {
+        showAddSchema.value = false;
     }
 
 </script>

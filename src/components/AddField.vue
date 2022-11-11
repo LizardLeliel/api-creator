@@ -16,7 +16,7 @@
                 
                 <div class="mb-3">
                     <label for="fieldDescription">Description:</label>
-                    <textarea class="form-control" v-model="fieldDescription" placeholder="Description..." id="fieldDecsription"> </textarea>
+                    <textarea class="form-control" v-model="fieldDescription" placeholder="Description..." id="fieldDescription"> </textarea>
                 </div>
 
                 <div class="mb-3">
