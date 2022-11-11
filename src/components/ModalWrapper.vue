@@ -9,7 +9,15 @@
 
 
 <script setup lang="ts">
+    import { onMounted, onUnmounted } from 'vue';
+
+    onMounted(() => {
+        document.body.style.overflow = 'hidden';
+    });
     
+    onUnmounted(() => {
+        document.body.style.overflow = 'auto';
+    })
 </script>
 
 
