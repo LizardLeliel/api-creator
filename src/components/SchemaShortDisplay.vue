@@ -39,7 +39,14 @@
     const fieldCount = computed(() => props.schema.getFields().length);
 
     function deleteSchema() {
-        schemasStore.deleteSchema(props.schema.name);
+        // Todo: alerts are apparently bad design, and undos are preferable. However, implementing undo functionality
+        //  is outside the scope of this project. Try replacing the alert with a custom modal that greys out the save
+        //  for a few seconds to stop habitual clicking, require the user to click a button labelled "delete 24 objects?"
+        const confirmation = confirm("Delete this Schema?");
+
+        if (confirmation) {
+            schemasStore.deleteSchema(props.schema.name);
+        }
     }
 </script>
 
