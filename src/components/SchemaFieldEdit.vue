@@ -77,6 +77,10 @@
 
     const editDescBox = ref<HTMLTextAreaElement | null>(null);
 
+    defineExpose({
+        isEditingDescription
+    });
+
     // computed
     const descriptionChanged = computed(() => {
         return editDescription.value == props.field.description;

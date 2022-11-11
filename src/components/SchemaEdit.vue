@@ -2,26 +2,27 @@
     <div>
         <h2> Schema: {{schema.name}} </h2>
 
-        <SchemaFieldEdit v-for="field in schema.getFields()" :field="field" />
+        <SchemaFieldEdit ref="fieldEdits" v-for="field in schema.getFields()" :field="field" />
         
         <div class="add-field ms-3">
             <button class="add-field-btn btn btn-dark" @click="openFieldAdd"> + Add Field </button>
         </div>
     </div>
 
+
     <teleport to="#modal-target">
         <ModalWrapper class="shadow" v-if="showAddField">
             <AddField @save="closeFieldEdit" @cancel="closeFieldEdit"> </AddField>
         </ModalWrapper>
     </teleport>
-
-
 </template>
 
 
 
 <script setup lang="ts">
-    import { provide, ref } from 'vue';
+    import { provide, ref, computed, type UnwrapNestedRefs } from 'vue';
+
+    import { onBeforeRouteLeave } from 'vue-router';
 
     import { Schema } from '@/models/schemas';
     import SchemaFieldEdit from '@/components/SchemaFieldEdit.vue';
@@ -37,6 +38,12 @@
 
     const showAddField = ref(false);
 
+    const fieldEdits = ref([]);
+
+    const noDescriptionsBeingEdited = computed(() => {
+        return !fieldEdits.value.some(element => (<typeof SchemaFieldEdit> element).isEditingDescription);
+    });
+
     function openFieldAdd() {
         showAddField.value = true;
     }
@@ -44,6 +51,18 @@
     function closeFieldEdit() {
         showAddField.value = false;
     }
+
+    onBeforeRouteLeave((to, from) => {
+        if (!noDescriptionsBeingEdited.value) {
+            const confirmLeave = confirm("You have unsaved changes. Are you sure you want to leave?");
+
+            if (!confirmLeave) {
+                return false;
+            }
+        }
+
+        return true;
+    });
 
 </script>
 
