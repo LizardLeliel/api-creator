@@ -9,10 +9,13 @@
                 </div>
                 <div class="col-4 h-100">
                     <RouterLink :to="'/schemas/' + schema.name">
-                        <button type="button" class="btn btn-dark h-100 w-100">
+                        <button type="button" class="schema-options btn btn-dark">
                             Edit
                         </button>
                     </RouterLink>
+                    <button type="button" class="schema-options btn btn-danger" @click="deleteSchema">
+                            Delete
+                    </button>
                 </div>
             </div>
         </div>
@@ -25,11 +28,19 @@
     import { computed } from 'vue';
     import { Schema } from '@/models/schemas';
     
+    import { SchemaStore } from '@/stores/schemaStore';
+
+    const schemasStore = SchemaStore();
+
     const props = defineProps({
         schema:  { type: Schema, required: true },
     });
 
     const fieldCount = computed(() => props.schema.getFields().length);
+
+    function deleteSchema() {
+        schemasStore.deleteSchema(props.schema.name);
+    }
 </script>
 
 
@@ -38,4 +49,12 @@
 
 
 <style scoped lang="scss">
+
+button.schema-options {
+    width: 100%;
+    height: 40%;
+    
+    margin-top: 5%;
+}
+
 </style>

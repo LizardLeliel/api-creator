@@ -28,6 +28,15 @@ export const SchemaStore = defineStore('schemas', () => {
         return readonly(newSchema);
     }
 
+    function deleteSchema(name: string) {
+        // schemas.index
+        const foundSchemaIndex = schemas.findIndex((schema) => schema.name == name);
+        if (foundSchemaIndex == -1) return undefined; 
+
+        schemas.splice(foundSchemaIndex, 1);
+        return true;
+    }    
+
     // Returns READONLY - intended for public use
     function getSchemaByName(name: string) {
         return readonly(_getSchemaByName(name));
@@ -77,7 +86,7 @@ export const SchemaStore = defineStore('schemas', () => {
         removeSchemaField(schemas[0].name, 'name');
     }
 
-    return { getSchemas, createSchema, getSchemaByName,
+    return { getSchemas, createSchema, deleteSchema, getSchemaByName, 
         addSimpleSchemaField, changeSchemaFieldRequired, changeSchemaFieldDescription, removeSchemaField,
         modifyFirstSchema, removeFirstSchemaName 
     };

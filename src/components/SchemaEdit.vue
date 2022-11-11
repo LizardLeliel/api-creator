@@ -2,9 +2,8 @@
     <div>
         <h2> Schema: {{schema.name}} </h2>
 
-        <SchemaFieldEdit v-for="field in schema.getFields()" :field="field">
+        <SchemaFieldEdit v-for="field in schema.getFields()" :field="field" />
         
-        </SchemaFieldEdit>
         <div class="add-field ms-3">
             <button class="add-field-btn btn btn-dark" @click="openFieldAdd"> + Add Field </button>
         </div>
