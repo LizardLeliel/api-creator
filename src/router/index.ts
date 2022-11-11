@@ -5,7 +5,6 @@ import ActionsMainView from "@/views/ActionsMainView.vue";
 import SchemasMainView from "@/views/SchemasMainView.vue";
 import FileNotFoundView from "@/views/FileNotFoundView.vue";
 import SchemaEditView from '@/views/SchemaEditView.vue';
-import AboutView from "@/views/AboutView.vue";
 
 
 const router = createRouter({
@@ -36,11 +35,6 @@ const router = createRouter({
       path: "/objects",
       name: "objects",
       component: ObjectsMainView,
-    },
-    {
-      path: "/about",
-      name: "about",
-      component: AboutView,
     },
     {
       path: "/:notfound(.*)*",

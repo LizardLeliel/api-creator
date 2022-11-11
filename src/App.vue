@@ -13,7 +13,6 @@
       <RouterLink class="nav-link" to="/schemas">Schemas</RouterLink> 
       <RouterLink class="nav-link" to="/objects">Objects</RouterLink> 
       <RouterLink class="nav-link" to="/Actions">Actions</RouterLink> 
-      <RouterLink class="nav-link" to="/about">About</RouterLink> 
     </nav>
 
   <div class="container mb-4 mt-3">
