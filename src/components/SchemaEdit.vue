@@ -11,9 +11,11 @@
 
 
     <teleport to="#modal-target">
-        <ModalWrapper class="shadow" v-if="showAddField">
-            <AddField @save="closeFieldEdit" @cancel="closeFieldEdit"> </AddField>
-        </ModalWrapper>
+        <OpacityFadeTransition>
+            <ModalWrapper class="shadow" v-if="showAddField">
+                <AddField @save="closeFieldEdit" @cancel="closeFieldEdit"> </AddField>
+            </ModalWrapper>
+        </OpacityFadeTransition>
     </teleport>
 </template>
 
@@ -21,13 +23,15 @@
 
 <script setup lang="ts">
     import { provide, ref, computed, type UnwrapNestedRefs } from 'vue';
-
     import { onBeforeRouteLeave } from 'vue-router';
 
     import { Schema } from '@/models/schemas';
+
     import SchemaFieldEdit from '@/components/SchemaFieldEdit.vue';
     import AddField from '@/components/AddField.vue';
     import ModalWrapper from '@/components/ModalWrapper.vue';
+
+    import OpacityFadeTransition from '@/components/Transitions/OpacityFade.vue';    
 
     const props = defineProps({
         schema:  { type: Schema, required: true },

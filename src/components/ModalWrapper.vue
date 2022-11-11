@@ -1,18 +1,19 @@
 <template>
     <div class="outer">
         <div class="inner">
-            <slot></slot>
+            <slot> </slot>
         </div>
-    </div> 
+    </div>
 </template>
 
 
 
 <script setup lang="ts">
-    import { onMounted, onUnmounted } from 'vue';
+    import { onMounted, onUnmounted, ref } from 'vue';
 
     onMounted(() => {
         document.body.style.overflow = 'hidden';
+        
     });
     
     onUnmounted(() => {
@@ -46,6 +47,7 @@
         // border: 1px solid black;
         // color: red;
 
+        padding: 50px;
         overflow-y: scroll;
 
         max-height: 80%;

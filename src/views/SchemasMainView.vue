@@ -28,9 +28,11 @@
 
 
     <teleport to="#modal-target">
-        <ModalWrapper class="shadow" v-if="showAddSchema">
-            <AddSchema @save="closeAddSchema" @cancel="closeAddSchema" />
-        </ModalWrapper>
+        <OpacityFadeTransition>
+            <ModalWrapper v-if="showAddSchema">
+                <AddSchema class="shadow" @save="closeAddSchema" @cancel="closeAddSchema" />
+            </ModalWrapper>
+        </OpacityFadeTransition>
     </teleport>
 
 </template>
@@ -44,9 +46,10 @@
     import { SchemaStore } from '@/stores/schemaStore';
 
     import SchemaDisplay from '@/components/SchemaShortDisplay.vue';
-
     import ModalWrapper from '@/components/ModalWrapper.vue';
     import AddSchema from '@/components/AddSchema.vue';
+
+    import OpacityFadeTransition from '@/components/Transitions/OpacityFade.vue';
 
     const schemasStore = SchemaStore();
     const schemas = schemasStore.getSchemas();
@@ -83,5 +86,5 @@
 
 
 <style scoped lang="scss">
-
+    
 </style>
