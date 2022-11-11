@@ -115,7 +115,11 @@
     }
 
     function deleteField() {
-        schemasStore.removeSchemaField(schema.name, props.field.label);
+        const confirmation = confirm("Are you sure you want to delete this field?");
+
+        if (confirmation) {
+            schemasStore.removeSchemaField(schema.name, props.field.label);
+        }
     }
 </script>
 
