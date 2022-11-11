@@ -28,7 +28,7 @@
 
     <teleport to="#modal-target">
         <ModalWrapper class="shadow" v-if="showAddSchema">
-            <AddSchema @save="closeAddSchema" @close="closeAddSchema" />
+            <AddSchema @save="closeAddSchema" @cancel="closeAddSchema" />
         </ModalWrapper>
     </teleport>
 

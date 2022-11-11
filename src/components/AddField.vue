@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-header">
-            New Field
+            New Schema
         </div>
 
         <div class="card-body">

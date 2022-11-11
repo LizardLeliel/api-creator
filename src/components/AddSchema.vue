@@ -47,7 +47,7 @@
     const schemaName = ref('');
     const schemaDescription = ref('');
 
-    const unchangedName = ref(true);
+    const unchangedName = ref(false);
     const showNameInvalid = ref(false);
 
     function labelHasChanged() {
@@ -61,8 +61,9 @@
     const validName = computed(() => {
         const notEmpty = schemaName.value != '';
         const hasValidCharacters = /^[a-zA-Z]\w*$/.test(schemaName.value);
-        // const uniqueName = schema.getField(fieldNa)
-        return notEmpty && hasValidCharacters;
+        const uniqueName = schemasStore.getSchemaByName(schemaName.value) == undefined;
+
+        return notEmpty && hasValidCharacters && uniqueName;
     });
 
     
@@ -71,7 +72,14 @@
     }
 
     function save() {
-        emit('save');
+        if (validName) {
+            schemasStore.createSchema(schemaName.value, schemaDescription.value);
+
+            emit('save');
+        }
+        else {
+            // What would be appropriate here??
+        }
     }
 
 </script>

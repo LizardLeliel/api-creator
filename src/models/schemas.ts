@@ -32,7 +32,7 @@ export class Schema {
     private fields: SchemaField[] = [];
     
     // Todo: make name private with getters and setters, support renaming a schema.
-    constructor(public readonly name: string, public readonly description?: string) { }
+    constructor(public readonly name: string, public readonly description: string = '') { }
 
     public addSimpleField(label: string, type: FieldType, description='', required = true): SchemaField | undefined {
         if (this.getField(label)) return undefined;
