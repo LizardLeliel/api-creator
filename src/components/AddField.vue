@@ -12,6 +12,9 @@
                         @change="labelHasChanged"
                         :class="{'is-invalid': showLabelInvalid && !validName }"
                         type="text" id="fieldLabel" />
+                    <div class="invalid-feedback">
+                        {{ invalidNameReason }}
+                    </div>
                 </div>
                 
                 <div class="mb-3">
@@ -33,6 +36,11 @@
                 <div class="form-check mb-3">
                     <input class="form-check-input" v-model="fieldRequired" type="checkbox" id="fieldRequired" /> 
                     <label class="form-check-label" for="fieldRequired"> Required? </label> 
+                    <!-- The way the logic works that its currently impossible for this to be shown, but its included anyways -->
+                    <!--  for future-proofing -->
+                    <div class="invalid-feedback">
+                        {{ invalidNameReason }}
+                    </div>
                 </div>
 
             </form>
@@ -77,6 +85,9 @@
     const fieldType = ref('');
     const fieldRequired = ref(false);
 
+    const invalidNameReason = ref('');
+    const invalidTypeReason = ref('');
+
     const unchangedLabel = ref(true);
     const showLabelInvalid = ref(false);
 
@@ -91,15 +102,37 @@
 
     // Computed Values
     const validName = computed(() => {
+
         const notEmpty = fieldLabel.value != '';
-        // const invalidCharacters = /^[^\w]\s*$/.test(fieldLabel.value)   //fieldLabel.
+        // Todo: Is there potential for bugs? Is this side-effecty? Is there a better way to do this?
+        if (!notEmpty) {
+            invalidNameReason.value = "Please type a label."
+            return false;
+        }
+        
         const validCharacters = /^[a-zA-Z]\w*$/.test(fieldLabel.value);
+        if (!validCharacters) {
+            // Todo: is there a valid reason why it can't start with a number?
+            invalidNameReason.value = "Label can not contain spaces or special characters, and must not start with a number."
+            return false;
+        }
+        
         const uniqueName = schema.getField(fieldLabel.value) == undefined;
-        return notEmpty && validCharacters && uniqueName;
+        if (!uniqueName) {
+            invalidNameReason.value = "Label is already taken."
+            return false;
+        }
+
+        return true;
     });
 
     const validType = computed(() => {
-        return fieldTypes.indexOf(<FieldType> fieldType.value) != -1; 
+        const fieldTypeSelected = fieldTypes.indexOf(<FieldType> fieldType.value) != -1;
+        if (!fieldTypeSelected) {
+            invalidTypeReason.value = "Please select the field's type";
+            return false;
+        } 
+        return true;  
     });
 
     const validForm = computed(() => {

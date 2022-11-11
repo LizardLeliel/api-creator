@@ -12,6 +12,9 @@
                         @change="labelHasChanged"
                         :class="{'is-invalid': showNameInvalid && !validName }"
                         type="text" id="fieldLabel" />
+                    <div class="invalid-feedback">
+                        {{ invalidNameReason }}
+                    </div>
                 </div>
                 
                 <div class="mb-3">
@@ -49,6 +52,7 @@
 
     const unchangedName = ref(false);
     const showNameInvalid = ref(false);
+    const invalidNameReason = ref('');
 
     function labelHasChanged() {
         unchangedName.value = true;
@@ -60,8 +64,23 @@
 
     const validName = computed(() => {
         const notEmpty = schemaName.value != '';
+        if (!notEmpty) {
+            invalidNameReason.value = "Please type a name."
+            return false;
+        }
+
         const hasValidCharacters = /^[a-zA-Z]\w*$/.test(schemaName.value);
+        if (!hasValidCharacters) {
+            // Todo: is there a valid reason why it can't start with a number?
+            invalidNameReason.value = "Name can not contain spaces or special characters, and must not start with a number."
+            return false;
+        }
+
         const uniqueName = schemasStore.getSchemaByName(schemaName.value) == undefined;
+        if (!uniqueName) {
+            invalidNameReason.value = "Name is already taken."
+            return false;
+        }
 
         return notEmpty && hasValidCharacters && uniqueName;
     });
