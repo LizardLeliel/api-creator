@@ -28,9 +28,9 @@
     import { computed } from 'vue';
     import { Schema } from '@/models/schemas';
     
-    import { SchemaStore } from '@/stores/schemaStore';
+    import { UseSchemaStore } from '@/stores/schemaStore';
 
-    const schemasStore = SchemaStore();
+    const schemaStore = UseSchemaStore();
 
     const props = defineProps({
         schema:  { type: Schema, required: true },
@@ -45,7 +45,7 @@
         const confirmation = confirm("Delete this Schema?");
 
         if (confirmation) {
-            schemasStore.deleteSchema(props.schema.name);
+            schemaStore.deleteSchema(props.schema.name);
         }
     }
 </script>

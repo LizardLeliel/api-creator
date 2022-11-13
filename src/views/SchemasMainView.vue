@@ -43,7 +43,7 @@
     import { ref } from 'vue';
 
     import { FieldType, Schema } from '@/models/schemas';
-    import { SchemaStore } from '@/stores/schemaStore';
+    import { UseSchemaStore } from '@/stores/schemaStore';
 
     import SchemaDisplay from '@/components/SchemaShortDisplay.vue';
     import ModalWrapper from '@/components/ModalWrapper.vue';
@@ -51,8 +51,8 @@
 
     import OpacityFadeTransition from '@/components/transitions/OpacityFade.vue';
 
-    const schemasStore = SchemaStore();
-    const schemas = schemasStore.getSchemas();
+    const schemaStore = UseSchemaStore();
+    const schemas = schemaStore.getSchemas();
 
     let newSchemaName = ref('');
     let newFieldName = ref('');
@@ -63,13 +63,13 @@
     let schemaSet: any = ref(false);
 
     function addNewSchema() {
-        lastSchema.value = schemasStore.createSchema(newSchemaName.value);
+        lastSchema.value = schemaStore.createSchema(newSchemaName.value);
         schemaSet.value = true;
         newFieldName.value = '';
     }
 
     function updateLastSchema() {
-        schemasStore.addSimpleSchemaField(lastSchema.value.name, newFieldName.value, FieldType.string);
+        schemaStore.addSimpleSchemaField(lastSchema.value.name, newFieldName.value, FieldType.string);
     }
 
     function createSchema() {

@@ -40,10 +40,10 @@
     import { ref, computed, watch } from 'vue';
     import { type Schema, FieldType, type SchemaFieldClass } from '@/models/schemas';
 
-    import { SchemaStore } from '@/stores/schemaStore';
+    import { UseSchemaStore } from '@/stores/schemaStore';
 
     // Setup stuff
-    const schemasStore = SchemaStore();
+    const schemaStore = UseSchemaStore();
 
     const emit = defineEmits(['save', 'cancel']);
 
@@ -76,7 +76,7 @@
             return false;
         }
 
-        const uniqueName = schemasStore.getSchemaByName(schemaName.value) == undefined;
+        const uniqueName = schemaStore.getSchemaByName(schemaName.value) == undefined;
         if (!uniqueName) {
             invalidNameReason.value = "Name is already taken."
             return false;
@@ -92,7 +92,7 @@
 
     function save() {
         if (validName) {
-            schemasStore.createSchema(schemaName.value, schemaDescription.value);
+            schemaStore.createSchema(schemaName.value, schemaDescription.value);
 
             emit('save');
         }

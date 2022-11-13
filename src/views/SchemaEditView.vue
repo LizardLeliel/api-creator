@@ -15,7 +15,7 @@
 
 
 <script setup lang="ts">
-    import { SchemaStore } from '@/stores/schemaStore';
+    import { UseSchemaStore } from '@/stores/schemaStore';
 
     import SchemaEdit from '@/components/SchemaEdit.vue';
 
@@ -28,8 +28,8 @@
     //  without knowing what schema they belong too.
     // For now, continue with this approach to practice form validation.
 
-    const schemasStore = SchemaStore();
-    const schema = schemasStore.getSchemaByName(props.schemaName);
+    const schemaStore = UseSchemaStore();
+    const schema: any = schemaStore.getSchemaByName(props.schemaName);
 
 </script>
 

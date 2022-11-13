@@ -57,10 +57,10 @@
     import { ref, inject, watch, computed } from 'vue'; 
     import { Schema, SchemaFieldClass } from '@/models/schemas';
 
-    import { SchemaStore } from '@/stores/schemaStore';
+    import { UseSchemaStore } from '@/stores/schemaStore';
 
     // Schema imports and props, and injects
-    const schemasStore = SchemaStore();
+    const schemaStore = UseSchemaStore();
 
     const props = defineProps({
         field: { type: SchemaFieldClass, required: true }
@@ -100,7 +100,7 @@
     })
 
     watch(editRequired, (newValue, oldValue) => {
-        schemasStore.changeSchemaFieldRequired(schema.name, props.field.label, newValue);
+        schemaStore.changeSchemaFieldRequired(schema.name, props.field.label, newValue);
     });
 
     // Callbacks
@@ -115,14 +115,14 @@
 
     function saveDescriptionEdit() {
         isEditingDescription.value = false;
-        schemasStore.changeSchemaFieldDescription(schema.name, props.field.label, editDescription.value);
+        schemaStore.changeSchemaFieldDescription(schema.name, props.field.label, editDescription.value);
     }
 
     function deleteField() {
         const confirmation = confirm("Are you sure you want to delete this field?");
 
         if (confirmation) {
-            schemasStore.removeSchemaField(schema.name, props.field.label);
+            schemaStore.removeSchemaField(schema.name, props.field.label);
         }
     }
 </script>

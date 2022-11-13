@@ -1,8 +1,8 @@
 <template>
     <div>
-        <h2> Schema: {{schema.name}} </h2>
+        <h2> Schema: {{(<typeof ref<Schema>><unknown>schema).name}} </h2>
 
-        <SchemaFieldEdit ref="fieldEdits" v-for="field in schema.getFields()" :field="field" />
+        <SchemaFieldEdit ref="fieldEdits" v-for="field in (<any>schema).getFields()" :field="field" />
         
         <div class="add-field ms-3">
             <button class="add-field-btn btn btn-dark" @click="openFieldAdd"> + Add Field </button>
@@ -25,7 +25,7 @@
     import { provide, ref, computed, type UnwrapNestedRefs } from 'vue';
     import { onBeforeRouteLeave } from 'vue-router';
 
-    import { Schema } from '@/models/schemas';
+    import type { Schema } from '@/models/schemas';
 
     import SchemaFieldEdit from '@/components/SchemaFieldEdit.vue';
     import AddField from '@/components/AddField.vue';
@@ -34,7 +34,7 @@
     import OpacityFadeTransition from '@/components/transitions/OpacityFade.vue';    
 
     const props = defineProps({
-        schema:  { type: Schema, required: true },
+        schema:  { type: ref<Schema>, required: true },
     });
 
     // TODO: delete this later, when Schemas, fields, stores are refactored.
