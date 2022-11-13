@@ -28,9 +28,9 @@
     div.outer {
         position: fixed;
         top: 0;
+        bottom: 0;
         left: 0;
         right: 0;
-        bottom: 0;
 
         background-color: #6666;
 
@@ -40,18 +40,16 @@
     div.inner {
         position: fixed;
         width: 50%;
+
         margin-left: calc(25% + 50px);
         margin-right: calc(25% + 50px);
         margin-top: 50px;
         margin-bottom: 50px;
+        
         top: 78px;
         z-index: 9999;
-        // border: 1px solid black;
-        // color: red;
-
-        // padding: 50px;
+        max-height: 80%;
         overflow-y: scroll;
 
-        max-height: 80%;
     }
 </style>
