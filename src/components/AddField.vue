@@ -60,10 +60,10 @@
     import { inject, ref, computed, watch } from 'vue';
     import { type Schema, FieldType, type SchemaFieldClass } from '@/models/schemas';
 
-    import { SchemaStore } from '@/stores/schemaStore';
+    import { UseSchemaStore } from '@/stores/schemaStore';
 
     // Setup stuff
-    const schemasStore = SchemaStore();
+    const schemaStore = UseSchemaStore();
 
     const emit = defineEmits(['save', 'cancel']);
 
@@ -145,7 +145,7 @@
     }
 
     function save() {
-        schemasStore.addSimpleSchemaField(schema.name,
+        schemaStore.addSimpleSchemaField(schema.name,
             fieldLabel.value,
             <FieldType> fieldType.value,
             fieldDescription.value,

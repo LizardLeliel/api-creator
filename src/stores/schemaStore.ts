@@ -4,13 +4,14 @@ import { defineStore } from 'pinia';
 import { FieldType, Schema } from '@/models/schemas';
 import { SAMPLE_SCHEMAS } from '@/data/sampleSchemas';
 
-import type { UnwrapNestedRefs } from 'vue';
+import type { UnwrapNestedRefs, ShallowReactive } from 'vue';
 
 
 export const UseSchemaStore = defineStore('schemas', () => {
     // TODO: implement schemas as a key-value map, where the key is the name of the schema, so finding
     //  a schema is O(1) access.
-    const schemas = shallowReactive<UnwrapNestedRefs<Schema>[]>(reactive(SAMPLE_SCHEMAS));
+    const schemas: ShallowReactive<UnwrapNestedRefs<Schema>[]> = shallowReactive<UnwrapNestedRefs<Schema>[]>(reactive(SAMPLE_SCHEMAS));
+    // const schemas: <ShallowRef = shallowReactive<UnwrapNestedRefs<Schema>[]>(reactive(SAMPLE_SCHEMAS));
     
     // We keep a map for quick access for various operations but otherwise provide an array for users for display purpose
     const schemaMap: { [key: string]: UnwrapNestedRefs<Schema> } = {}; 
@@ -18,71 +19,80 @@ export const UseSchemaStore = defineStore('schemas', () => {
         schemaMap[schema.name] = schema;
     }
 
-    function getSchemas() {
+    function getSchemas(): DeepReadonly<UnwrapNestedRefs<Schema>[]> {
         return readonly(schemas);
     }
 
     // As much as allowing users to modify schemas directly instead of using these wrapper functions
     //  would be much easier to understand, the functionality to change a schema's name, which
     //  must be unique, justifies the wrapper capabilities below.
-    function createSchema(name: string, description?: string) {
-        if (_getSchemaByName(name)) return undefined;
+    function createSchema(name: string, description?: string): DeepReadonly<UnwrapNestedRefs<Schema>> {
+        if (_getSchemaByName(name)) {
+            throw new ReferenceError(`Schema "{name}" already exists`);
+        }
         
-        let newSchema: Schema = new Schema(name, description);
+        let newSchema: UnwrapNestedRefs<Schema> = reactive(new Schema(name, description));
         schemas.push(newSchema);
         schemaMap[newSchema.name] = newSchema;
         return readonly(newSchema);
     }
 
-    function deleteSchema(name: string) {
+    function deleteSchema(name: string): DeepReadonly<UnwrapNestedRefs<Schema>> {
         // schemas.index
         const foundSchemaIndex = schemas.findIndex((schema) => schema.name == name);
-        if (foundSchemaIndex == -1) return undefined; 
+        if (foundSchemaIndex == -1) {
+            throw new ReferenceError('Schema "{name}" does not exist.');
+        } 
+
+        const foundSchema = readonly(schemaMap[name]);
 
         schemas.splice(foundSchemaIndex, 1);
         delete schemaMap[name];
-        return true;
+        return foundSchema;
     }    
 
     // Returns READONLY - intended for public use
-    function getSchemaByName(name: string): DeepReadonly<UnwrapNestedRefs<Schema>> | undefined {
+    function getSchemaByName(name: string): DeepReadonly<UnwrapNestedRefs<Schema>> {
         const _schema = _getSchemaByName(name);
-        return _schema? readonly(_schema): undefined; 
+        return readonly(_schema); 
     }
 
     // Returns Reactive - intended for private use
-    function _getSchemaByName(name: string): UnwrapNestedRefs<Schema> | undefined {
+    function _getSchemaByName(name: string): UnwrapNestedRefs<Schema> {
+        const _schema = schemaMap[name];
+        if (!_schema) {
+            throw new ReferenceError(`Schema "{name}" does not exist.`);
+        }
         return schemaMap[name];
     }
 
-    function addSimpleSchemaField(schema: string, field: string, type: FieldType, description: string = '', required: boolean = true): true | undefined {
+    function addSimpleSchemaField(schema: string, field: string, type: FieldType, description: string = '', required: boolean = true): DeepReadonly<UnwrapNestedRefs<Schema>> {
         const foundSchema = _getSchemaByName(schema);
-        if (!foundSchema) return undefined;
         
-        // const newSchema = reactive(new Schema(schema, type, description));
         foundSchema.addSimpleField(field, type, description, required);
-        return true;
+        return readonly(foundSchema);
     }
     
-    function changeSchemaFieldRequired(schema: string, field: string, required: Boolean) {
+    function changeSchemaFieldRequired(schema: string, field: string, required: Boolean): DeepReadonly<UnwrapNestedRefs<Schema>> {
         const foundSchema = _getSchemaByName(schema);
-        if (!foundSchema) return undefined;
 
-        return required? foundSchema.makeFieldRequied(field): foundSchema.makeFieldNotRequired(field);
+        required? foundSchema.makeFieldRequied(field): foundSchema.makeFieldNotRequired(field);
+
+        return readonly(foundSchema);
     }
 
-    function changeSchemaFieldDescription(schema: string, field: string, description: string) {
+    function changeSchemaFieldDescription(schema: string, field: string, description: string): DeepReadonly<UnwrapNestedRefs<Schema>> {
         const foundSchema = _getSchemaByName(schema);
-        if (!foundSchema) return undefined;
 
-        return foundSchema.changeFieldDescription(field, description);
+        foundSchema.changeFieldDescription(field, description);
+        return readonly(foundSchema);
     }
 
-    function removeSchemaField(schema: string, field: string) {
+    function removeSchemaField(schema: string, field: string): DeepReadonly<UnwrapNestedRefs<Schema>> {
         const foundSchema = _getSchemaByName(schema);
-        if (!foundSchema) return undefined;
 
-        return foundSchema.removeField(field);
+        foundSchema.removeField(field);
+        return readonly(foundSchema);
     }
 
     return { getSchemas, createSchema, deleteSchema, getSchemaByName, 

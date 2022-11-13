@@ -4,7 +4,7 @@
     <hr />
 
     <div class="row no-gutters p-3">
-        <SchemaDisplay class="col-6" v-for="schema of schemas" :schema="<Schema> schema"> </SchemaDisplay>
+        <SchemaDisplay class="col-6" v-for="schema of schemas" :schema="<any>schema"> </SchemaDisplay>
     </div>
 
     <hr />
@@ -40,7 +40,7 @@
 
 
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { ref, type UnwrapNestedRefs } from 'vue';
 
     import { FieldType, Schema } from '@/models/schemas';
     import { UseSchemaStore } from '@/stores/schemaStore';
