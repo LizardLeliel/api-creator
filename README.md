@@ -9,4 +9,4 @@ This website represents a UI for a theoritical service where you can create Sche
 
 That being said, not only is this website a work in progress, there is no backend currently. On top of that, the purpose behind this was to learn/practice Vude and present a demonstration of said skill. That being said, I do want to develop this idea until something that can be useful and practical.
 
-So far, only Schemas are implemented.
+So far, only Schemas are implemented in limited capacity.
