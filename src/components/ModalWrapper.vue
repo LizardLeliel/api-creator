@@ -40,14 +40,16 @@
     div.inner {
         position: fixed;
         width: 50%;
-        margin-left: 25%;
-        margin-right: 25%;
+        margin-left: calc(25% + 50px);
+        margin-right: calc(25% + 50px);
+        margin-top: 50px;
+        margin-bottom: 50px;
         top: 78px;
         z-index: 9999;
         // border: 1px solid black;
         // color: red;
 
-        padding: 50px;
+        // padding: 50px;
         overflow-y: scroll;
 
         max-height: 80%;
