@@ -28,7 +28,7 @@ export const UseSchemaStore = defineStore('schemas', () => {
     //  must be unique, justifies the wrapper capabilities below.
     function createSchema(name: string, description?: string): DeepReadonly<UnwrapNestedRefs<Schema>> {
         if (schemaExists(name)) {
-            throw new ReferenceError(`Schema "{name}" already exists`);
+            throw new ReferenceError('Schema "' + name + '" already exists');
         }
         
         let newSchema: UnwrapNestedRefs<Schema> = reactive(new Schema(name, description));
@@ -41,7 +41,7 @@ export const UseSchemaStore = defineStore('schemas', () => {
         // schemas.index
         const foundSchemaIndex = schemas.findIndex((schema) => schema.name == name);
         if (foundSchemaIndex == -1) {
-            throw new ReferenceError('Schema "{name}" does not exist.');
+            throw new ReferenceError('Schema "' + name + '" does not exist.');
         } 
 
         const foundSchema = readonly(schemaMap[name]);
@@ -65,7 +65,7 @@ export const UseSchemaStore = defineStore('schemas', () => {
     function _getSchemaByName(name: string): UnwrapNestedRefs<Schema> {
         const _schema = schemaMap[name];
         if (!_schema) {
-            throw new ReferenceError(`Schema "{name}" does not exist.`);
+            throw new ReferenceError('Schema "' + name + '" does not exist.');
         }
         return schemaMap[name];
     }
