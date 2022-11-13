@@ -3,13 +3,10 @@
 Welcome to the Rapid Prototype API Creator!
 -------------------------------------------
 
-It can be quite a bit to setup an API for very basic use cases, setting up a database and then the server to accept all the get and post requests and such.
-Wouldn't it be easy to configure all that from a browser?
+It can be quite a bit to setup an API for very basic use cases. You have to set up a database and then write the server to accept all the get and post requests and such, despite how simple they are. Wouldn't it be easy to configure all that from a browser so you can test an idea?
 
-So with that, this website represents a UI for a theoritical service where you can create Schemas, data instances of Schemas, and various api actions used to modify them!
+This website represents a UI for a theoritical service where you can create Schemas, instances of Schemas, and the various api actions used to modify them! It would take care of simple use-case server-side validation too.
 
-That being said, not only is this website a work in progress, there is no backend currently. On top of that, the purpose behind this is to learn and practice Vue
-with a real-world application - however, I would like to develop this idea further into something practical.
+That being said, not only is this website a work in progress, there is no backend currently. On top of that, the purpose behind this was to learn/practice Vude and present a demonstration of said skill. That being said, I do want to develop this idea until something that can be useful and practical.
 
-Focus is put into implementing schemas. "Objects" and especially "Actions" may not be implemented for a long while, since after Schemas are complete, I feel like I have achieved my 
-goal of learning Vue - I'd be repeating what I've already done implementing those instead of doing new problems.
+So far, only Schemas are implemented.
