@@ -5,7 +5,9 @@
         <SchemaFieldEdit ref="fieldEdits" v-for="field in (<any>schema).getFields()" :field="field" />
         
         <div class="add-field ms-3">
-            <button class="add-field-btn btn btn-dark" @click="openFieldAdd"> + Add Field </button>
+            <button class="add-field-btn btn btn-dark" @click="openFieldAdd"> 
+                <div class="add-field-content"> <i class="bi-plus-circle-fill sm-icon"></i> Add Field </div>
+            </button>
         </div>
     </div>
 
@@ -82,6 +84,14 @@
         .add-field-btn {
             width: 100%;
             height: 3rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            height: fit-content;
+        }
+
+        .add-field-content {
+            font-size: 1.2rem;
+            display: block;
         }
     }
 

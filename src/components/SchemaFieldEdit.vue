@@ -19,11 +19,15 @@
         <div class="row fit-content">
             <!-- If there is NO description... -->
             <div class="col-10" v-if="!isEditingDescription && descriptionIsEmpty">
-                <p class="description-preview text-muted" @click="toggleEditingDescription">Click to add a description...</p>
+                <p class="description-preview text-muted" @click="toggleEditingDescription">
+                    Click to add a description... <i class="bi-pencil-fill"> </i>
+                </p>
             </div>
 
             <div class="col-10" v-if="!isEditingDescription && !descriptionIsEmpty">
-                <p class="description-preview" @click="toggleEditingDescription()"> {{ field.description }} </p>
+                <p class="description-preview" @click="toggleEditingDescription()"> 
+                    {{ field.description }} <i class="bi-pencil-fill"></i>
+                </p>
             </div>
 
             <div class="col-10" v-if="isEditingDescription">
@@ -44,7 +48,7 @@
             </div>
         </div>
             <button class="btn btn-danger" type="button" @click="deleteField">
-                Delete Field
+                <i class="bi-trash3-fill"> </i>
             </button>
     </div> 
 </template>

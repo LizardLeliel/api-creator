@@ -2,7 +2,7 @@
     <br />
 
     <!-- Todo: merge "SchemaEdit" and this file. -->
-    <RouterLink to="/schemas"> Back to main schemas page</RouterLink>
+    <RouterLink to="/schemas"> <button class="return-btn btn btn-light"> <i class="bi-arrow-return-left"></i> Schemas </button> </RouterLink>
 
     <div> </div>
     <br />
@@ -34,5 +34,7 @@
 
 
 <style scoped lang="scss">
-
+.return-btn {
+    border: 2px solid lightgrey;
+}
 </style>

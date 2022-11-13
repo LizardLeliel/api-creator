@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-4 h-100">
                         <button type="button" class="btn btn-dark h-100 w-100" @click="createSchema">
-                            +
+                            <i class="bi-plus-circle-fill l-icon text-light"> </i>
                         </button>
                     </div>
                 </div>

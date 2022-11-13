@@ -14,7 +14,7 @@
                         </button>
                     </RouterLink>
                     <button type="button" class="schema-options btn btn-danger" @click="deleteSchema">
-                            Delete
+                            <i class="bi-trash3-fill display-inline-block m-icon"></i>
                     </button>
                 </div>
             </div>
