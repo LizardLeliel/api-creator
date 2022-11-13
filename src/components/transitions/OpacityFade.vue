@@ -16,7 +16,7 @@
 <style scoped lang="scss">
     .fade-in-out-enter-active,
     .fade-in-out-leave-active {
-        transition: opacity 0.15s ease;
+        transition: opacity 0.55s ease;
     }
 
     .fade-in-out-enter-from,
