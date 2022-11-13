@@ -2,7 +2,7 @@
     <div>
         <h2> Schema: {{(<typeof ref<Schema>><unknown>schema).name}} </h2>
 
-        <SchemaFieldEdit ref="fieldEdits" v-for="field in (<any>schema).getFields()" :field="field" />
+        <SchemaFieldEdit ref="fieldEdits" v-for="field in (<any>schema).getFields()" :field="field" :key="field.label" />
         
         <div class="add-field ms-3">
             <button class="add-field-btn btn btn-dark" @click="openFieldAdd"> 
