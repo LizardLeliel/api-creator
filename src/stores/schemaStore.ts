@@ -27,7 +27,7 @@ export const UseSchemaStore = defineStore('schemas', () => {
     //  would be much easier to understand, the functionality to change a schema's name, which
     //  must be unique, justifies the wrapper capabilities below.
     function createSchema(name: string, description?: string): DeepReadonly<UnwrapNestedRefs<Schema>> {
-        if (_getSchemaByName(name)) {
+        if (schemaExists(name)) {
             throw new ReferenceError(`Schema "{name}" already exists`);
         }
         
