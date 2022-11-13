@@ -7,13 +7,15 @@
         <div class="card-body">
             <form>
                 <div class="mb-3">
-                    <label for="fieldLabel">Field Label: <small>(Required)</small></label>
+                    <label for="fieldLabel">
+                        Field Label: <small>(<RequiredIcon :valid="validLabel"/>Required)</small>
+                    </label>
                     <input class="form-control" v-model="fieldLabel" 
                         @change="labelHasChanged"
-                        :class="{'is-invalid': showLabelInvalid && !validName }"
+                        :class="{'is-invalid': showLabelInvalid && !validLabel }"
                         type="text" id="fieldLabel" />
                     <div class="invalid-feedback">
-                        {{ invalidNameReason }}
+                        {{ invalidLabelReason }}
                     </div>
                 </div>
                 
@@ -23,7 +25,9 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="fieldType"> Type: <small>(Required)</small> </label>
+                    <label for="fieldType"> 
+                        Type: <small>(<RequiredIcon :valid="validType"/>Required)</small> 
+                    </label>
                     <select class="form-control" :class="{ 'text-secondary': fieldType == '' }" v-model="fieldType" id="fieldType">
                         <option class="text-light" value="" selected disabled> Please select a field type </option>
                         <option v-for="type in fieldTypes" :value="type" :key="type"> 
@@ -39,7 +43,7 @@
                     <!-- The way the logic works that its currently impossible for this to be shown, but its included anyways -->
                     <!--  for future-proofing -->
                     <div class="invalid-feedback">
-                        {{ invalidNameReason }}
+                        {{ invalidLabelReason }}
                     </div>
                 </div>
 
@@ -59,6 +63,8 @@
 <script setup lang="ts">
     import { inject, ref, computed, watch } from 'vue';
     import { type Schema, FieldType, type SchemaFieldClass } from '@/models/schemas';
+
+    import RequiredIcon from '@/components/RequiredIcon.vue';
 
     import { UseSchemaStore } from '@/stores/schemaStore';
 
@@ -85,7 +91,7 @@
     const fieldType = ref('');
     const fieldRequired = ref(false);
 
-    const invalidNameReason = ref('');
+    const invalidLabelReason = ref('');
     const invalidTypeReason = ref('');
 
     const unchangedLabel = ref(true);
@@ -101,25 +107,25 @@
     });
 
     // Computed Values
-    const validName = computed(() => {
+    const validLabel = computed(() => {
 
         const notEmpty = fieldLabel.value != '';
         // Todo: Is there potential for bugs? Is this side-effecty? Is there a better way to do this?
         if (!notEmpty) {
-            invalidNameReason.value = "Please type a label."
+            invalidLabelReason.value = "Please type a label."
             return false;
         }
         
         const validCharacters = /^[a-zA-Z]\w*$/.test(fieldLabel.value);
         if (!validCharacters) {
             // Todo: is there a valid reason why it can't start with a number?
-            invalidNameReason.value = "Label can not contain spaces or special characters, and must not start with a number."
+            invalidLabelReason.value = "Label can not contain spaces or special characters, and must not start with a number."
             return false;
         }
         
         const uniqueName = schema.getField(fieldLabel.value) == undefined;
         if (!uniqueName) {
-            invalidNameReason.value = "Label is already taken."
+            invalidLabelReason.value = "Label is already taken."
             return false;
         }
 
@@ -136,7 +142,7 @@
     });
 
     const validForm = computed(() => {
-        return validName.value && validType.value;
+        return validLabel.value && validType.value;
     });
 
     // Emited events

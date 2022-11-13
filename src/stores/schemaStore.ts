@@ -57,6 +57,10 @@ export const UseSchemaStore = defineStore('schemas', () => {
         return readonly(_schema); 
     }
 
+    function schemaExists(name: string): boolean {
+        return schemaMap[name]? true: false;
+    }
+
     // Returns Reactive - intended for private use
     function _getSchemaByName(name: string): UnwrapNestedRefs<Schema> {
         const _schema = schemaMap[name];
@@ -95,7 +99,7 @@ export const UseSchemaStore = defineStore('schemas', () => {
         return readonly(foundSchema);
     }
 
-    return { getSchemas, createSchema, deleteSchema, getSchemaByName, 
+    return { getSchemas, createSchema, deleteSchema, getSchemaByName, schemaExists,
         addSimpleSchemaField, changeSchemaFieldRequired, changeSchemaFieldDescription, removeSchemaField,
     };
 });

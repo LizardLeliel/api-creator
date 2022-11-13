@@ -7,7 +7,7 @@
         <div class="card-body">
             <form>
                 <div class="mb-3">
-                    <label for="fieldLabel">Schema Name: <small>required</small></label>
+                    <label for="fieldLabel">Schema Name: <small>(<RequiredIcon :valid="validName" />required)</small></label>
                     <input class="form-control" v-model="schemaName" 
                         @change="labelHasChanged"
                         :class="{'is-invalid': showNameInvalid && !validName }"
@@ -40,6 +40,8 @@
     import { ref, computed, watch } from 'vue';
 
     import { UseSchemaStore } from '@/stores/schemaStore';
+
+    import RequiredIcon from '@/components/RequiredIcon.vue';
 
     // Setup
     const schemaStore = UseSchemaStore();
@@ -75,13 +77,13 @@
             return false;
         }
 
-        const uniqueName = schemaStore.getSchemaByName(schemaName.value) == undefined;
+        const uniqueName = !schemaStore.schemaExists(schemaName.value);
         if (!uniqueName) {
             invalidNameReason.value = "Name is already taken."
             return false;
         }
 
-        return notEmpty && hasValidCharacters && uniqueName;
+        return true;
     });
 
     
