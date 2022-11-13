@@ -3,8 +3,6 @@
         <h5 class="w-100 ps-1"> 
             <p class="mb-0"> 
                 <u>Field</u>: <span>{{ field.label }} </span>
-                <!-- <u>Field</u>: <input class="write-field-name" type="text" v-model="editLabel" /> -->
-                <!-- &nbsp; &nbsp; <button type="button" class="btn btn-dark" @click="updateName"> Save Name </button> -->
                 
                 <span class="position-absolute end-0" style="width: 200px;">
                     &emsp; <input class="form-check-input" type="checkbox" v-model="editRequired"  /> &nbsp;
@@ -71,7 +69,6 @@
     // Data
     const editRequired = ref(props.field.required);
     const editDescription = ref(props.field.description);
-    const editType = ref(props.field.type);
 
     const isEditingDescription = ref(false);
 
@@ -91,15 +88,14 @@
     })
 
     // watchers
-    watch(editDescBox, (newValue, oldValue) => {
+    watch(editDescBox, newValue => {
         if (newValue != null) {
-            // TODO: Find out why "-1" is the magic number and how to make this more programmatic.
-            // (Maybe "scrollheight" accounts for border but height doesn't?)
-            (<HTMLTextAreaElement>newValue).style.height = (<HTMLTextAreaElement>newValue).scrollHeight + 1 + 'px';
+            const MAGIC_VERTICAL_ADJUST: number = +1;
+            (<HTMLTextAreaElement>newValue).style.height = (<HTMLTextAreaElement>newValue).scrollHeight + MAGIC_VERTICAL_ADJUST+ 'px';
         }
     })
 
-    watch(editRequired, (newValue, oldValue) => {
+    watch(editRequired, newValue => {
         schemaStore.changeSchemaFieldRequired(schema.name, props.field.label, newValue);
     });
 

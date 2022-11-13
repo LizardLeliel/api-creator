@@ -38,11 +38,10 @@
 
 <script setup lang="ts">
     import { ref, computed, watch } from 'vue';
-    import { type Schema, FieldType, type SchemaFieldClass } from '@/models/schemas';
 
     import { UseSchemaStore } from '@/stores/schemaStore';
 
-    // Setup stuff
+    // Setup
     const schemaStore = UseSchemaStore();
 
     const emit = defineEmits(['save', 'cancel']);
@@ -71,7 +70,7 @@
 
         const hasValidCharacters = /^[a-zA-Z]\w*$/.test(schemaName.value);
         if (!hasValidCharacters) {
-            // Todo: is there a valid reason why it can't start with a number?
+            // Note: it could start with a number, but for demonstration/practice purposes, I'm disallowing it.
             invalidNameReason.value = "Name can not contain spaces or special characters, and must not start with a number."
             return false;
         }
@@ -95,9 +94,6 @@
             schemaStore.createSchema(schemaName.value, schemaDescription.value);
 
             emit('save');
-        }
-        else {
-            // What would be appropriate here??
         }
     }
 

@@ -54,23 +54,8 @@
     const schemaStore = UseSchemaStore();
     const schemas = schemaStore.getSchemas();
 
-    let newSchemaName = ref('');
-    let newFieldName = ref('');
     let showAddSchema = ref(false);
 
-    // TODO: Delete this, this was for playing purposes
-    let lastSchema: any = ref(undefined);
-    let schemaSet: any = ref(false);
-
-    function addNewSchema() {
-        lastSchema.value = schemaStore.createSchema(newSchemaName.value);
-        schemaSet.value = true;
-        newFieldName.value = '';
-    }
-
-    function updateLastSchema() {
-        schemaStore.addSimpleSchemaField(lastSchema.value.name, newFieldName.value, FieldType.string);
-    }
 
     function createSchema() {
         showAddSchema.value = true;
