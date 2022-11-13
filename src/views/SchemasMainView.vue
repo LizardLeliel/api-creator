@@ -40,9 +40,8 @@
 
 
 <script setup lang="ts">
-    import { ref, type UnwrapNestedRefs } from 'vue';
+    import { ref } from 'vue';
 
-    import { FieldType, Schema } from '@/models/schemas';
     import { UseSchemaStore } from '@/stores/schemaStore';
 
     import SchemaDisplay from '@/components/SchemaShortDisplay.vue';
