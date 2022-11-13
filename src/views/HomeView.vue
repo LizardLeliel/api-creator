@@ -23,5 +23,14 @@
       Focus is put into implementing schemas. "Objects" and especially "Actions" may not be implemented for a long while, since after Schemas are complete, I feel like I have achieved my 
       goal of learning Vue - I'd be repeating what I've already done implementing those instead of doing new problems.
     </p>
+
+    <h2> Stuff I want to point out</h2>
+    <ul>
+      <li> If you're editing a schema's field's description and want to go to any other page, you will be asked about unsaved changes. </li> 
+      <li> You can't save a new field/Schema if the form is invalid. Invalid-feedback will be displayed for invalid names after the input was modified from the default state. </li>
+      <li> If you're editing a schema's field's description, you can't click "save" unless the text has changed. </li>
+      <li> Any change values in Schemas and their fields be tracked between page changes and displayed correctly. </li>
+      <li> Opening a modal will show an opacity animation (which is exaggerated so it can be noticed.) </li>
+    </ul>
   </main>
 </template>
