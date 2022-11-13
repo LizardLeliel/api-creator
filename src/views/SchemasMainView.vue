@@ -4,7 +4,7 @@
     <hr />
 
     <div class="row no-gutters p-3">
-        <SchemaDisplay class="col-6" v-for="schema of schemas" :schema="<any>schema"> </SchemaDisplay>
+        <SchemaDisplay class="col-6" v-for="schema of schemas" :schema="<any>schema" :key="schema.name"> </SchemaDisplay>
     </div>
 
     <hr />

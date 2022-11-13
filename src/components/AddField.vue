@@ -26,7 +26,7 @@
                     <label for="fieldType"> Type: <small>(Required)</small> </label>
                     <select class="form-control" :class="{ 'text-secondary': fieldType == '' }" v-model="fieldType" id="fieldType">
                         <option class="text-light" value="" selected disabled> Please select a field type </option>
-                        <option v-for="type in fieldTypes" :value="type"> 
+                        <option v-for="type in fieldTypes" :value="type" :key="type"> 
 
                             {{ type.charAt(0).toUpperCase() + type.slice(1) }}
                         </option>
